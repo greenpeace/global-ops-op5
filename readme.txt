@@ -1,1 +1,1 @@
-If I do this correctly there should be 2 branches. One branch "op5_commands" to manage the /etc/nrpe.d/op5_commands.cfg file and "plugins" to manage the /opt/plugins directory.
+This repo should be checked out to /opt/plugins on the OP5 proxies. Inside of /opt/plugins/custom is a copy of op5_commands.cfg which should be copied to /etc/nrpe.d/op5_commands.cfg.
