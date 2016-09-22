@@ -1,0 +1,23 @@
+[name]
+check_traffic
+
+[info]
+Check the amount of traffic on a Network port.
+
+[why]
+For example to get notified if you suddenly have strange traffic pattern in you network, eg virus attack.
+
+[how]
+Polls traffic usage on a SNMP enabled network device, for example a router or a switch. The plugin lets you specify threshold values of the traffic usage.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+Network, snmp, router, switch

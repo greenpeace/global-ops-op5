@@ -1,0 +1,22 @@
+[commands]
+check-host-alive=$USER2$/check_host -H $HOSTADDRESS$
+[name]
+check_host
+
+[info]
+Checks status of a Host.
+[why]
+To see that the host is alive.
+[how]
+By using ICMP
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+host, icmp, network

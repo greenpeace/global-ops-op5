@@ -1,0 +1,26 @@
+[commands]
+check_log=$USER1$/check_log2.pl -l $ARG1$ -s /opt/monitor/var/$ARG2$ -p $HOSTADDRESS$
+check_log_eventlog=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$_logmsg.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$_logmsg.log -s /var/www/html/logs/$HOSTADDRESS$_logmsg.log-seekfile -p $ARG1$
+check_log_snmptraps=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$__snmptraps.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$__snmptraps.log -s /var/www/html/logs/$HOSTADDRESS$__snmptraps.log-seekfile -p $ARG1$
+check_log_syslog=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$_logmsg.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$_logmsg.log -s /var/www/html/logs/$HOSTADDRESS$_logmsg.log-seekfile -p $ARG1$
+
+[name]
+check_log2
+
+[info]
+Smarter logfile checker for unix systems.
+[why]
+To automatically keep track of error messages that only is visable in a logfile.
+[how]
+This plugin starts searching the logfile where it stopped on the last check, it therefore doesnt need to go through the whole file (good on large logfiles). You can specify search patterns both as normal text and as a regular expression.
+[platforms]
+Unix
+
+[categories]
+Logs
+
+[support]
+5
+
+[tags]
+unix, linux, logs

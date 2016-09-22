@@ -1,0 +1,24 @@
+[commands]
+check-host-alive-icmp=$USER2$/check_icmp -H $HOSTADDRESS$ -w 5000,80% -c 5000,100% -n 1
+check_ping=$USER2$/check_icmp -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -n 5
+check_ping_critical=$USER2$/check_icmp -H $HOSTADDRESS$ -w 20,20% -c 100,60% -n 5
+check_ping_normal=$USER2$/check_icmp -H $HOSTADDRESS$ -w 100,20% -c 500,60% -n 5
+[name]
+check_icmp
+
+[info]
+Checks RTA and Packet loss using ICMP.
+[why]
+To see status and reachability on your network.
+[how]
+Checks connectivity on the network using ICMP. It lets you specify thresholds on RTA and LOSS, and also how many packets to send, packetsize, TTL, Interval between packets, and timeout.
+[platforms]
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+host, icmp, ping, packet loss, rta

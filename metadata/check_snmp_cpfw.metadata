@@ -1,0 +1,26 @@
+[name]
+check_snmp_cpfw
+
+[info]
+Checks Checkpoint Firewall-1 status and policy state (must be installed).
+Can check:
+- installed policy name, you mut provide the exact name of the policy
+- connections, warning and maximum levels must be provided.
+
+[why]
+To make sure your Checkpoint Firewall-1 are working as it is supposed to.
+
+[how]
+Checks by SNMP some modules of Checkpoint FW-1 filtering or management module. Each module will be checked independently.
+
+[platforms]
+Checpoint Firewall-1
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+firewall-1, status, policy state, snmp, network

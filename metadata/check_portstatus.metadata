@@ -1,0 +1,30 @@
+[commands]
+check_portstatus=$USER1$/check_portstatus -H $HOSTADDRESS$ -C $ARG1$ -v $ARG2$
+check_portstatus_dormant=$USER1$/check_portstatus -H $HOSTADDRESS$ -C $ARG1$ -v $ARG2$ -w $ARG3$
+
+[name]
+check_portstatus
+
+[info]
+This plugin keeps track of the number of unused switch ports.  In
+order to make the link clickable in the monitoring interface you need
+to disable escaping of html (escape_html_tags=0) in the nagios cgi.cfg
+file which by default is located at /opt/monitor/etc/cgi.cfg.
+
+[why]
+To help you get control of the used ports of your switches.
+
+[how]
+By SNMP.
+
+[platforms]
+Switches
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+network, switch, router, switch ports, snmp

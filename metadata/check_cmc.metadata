@@ -1,0 +1,23 @@
+[name]
+check_cmc
+
+[info]
+Checks the temperature sensors of the Rittal CMC-TC monitoring system.
+
+[why]
+To help you control environments where the temperture is critical.
+
+[how]
+By collecting data via SNMP.
+
+[platforms]
+Rittal CMC-TC
+
+[categories]
+Environmental
+
+[support]
+6
+
+[tags]
+rittal, cmc-tc, environment, snmp

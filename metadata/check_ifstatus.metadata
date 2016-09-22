@@ -1,0 +1,20 @@
+[name]
+check_ifstatus
+
+[info]
+Checks the operational status of all network interfaces on a host.
+[why]
+To see status of the network ports.
+[how]
+By using SNMP.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+5
+
+[tags]
+network, snmp, interface status, switch, router

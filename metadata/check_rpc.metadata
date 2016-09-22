@@ -1,0 +1,20 @@
+[name]
+check_rpc
+
+[info]
+Check if a RPC service is registered and running.
+[why]
+To check status of your RPC services.
+[how]
+Connects to a REAL server and reports connection status.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+rpc service, unix, real

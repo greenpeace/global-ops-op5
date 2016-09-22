@@ -1,0 +1,20 @@
+[commands]
+check_ntp_time=$USER1$/check_ntp_time -H $HOSTADDRESS$ -w 60 -c 120
+
+[name]
+check_ntp_time
+
+[info]
+Checks the clock offset between the local host and a remote NTP server.
+[why]
+To keep track of server clocks.
+[how]
+Connects to an NTP server and and compares the NTP clock to the local clock. It lets you set thresholds on accepted offset.
+[platforms]
+Not platform dependent
+
+[support]
+4
+
+[tags]
+ntp, time

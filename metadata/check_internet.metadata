@@ -1,0 +1,25 @@
+[commands]
+
+[name]
+check_internet
+
+[info]
+This plugin takes a number of Internet sites and checks if any one of them are alive.
+
+[why]
+The plugin can be used to monitor your Internet connection and alert you if it is down.
+
+[how]
+It is simply a wrapper around check_http. It takes every Internet site sent as an argument to check_internet and exexecutes a simple check_http check with the timeout set to 5 seconds.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking, Web
+
+[support]
+4
+
+[tags]
+internet, network, web

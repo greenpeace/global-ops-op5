@@ -1,0 +1,23 @@
+[name]
+check_new_ents
+
+[info]
+The plugin looks for the latest file in a folder and tell you when the file wast last changed.
+
+[why]
+It can be usefull for informative monitoring like transaction files, backup files.
+
+[how]
+By look in a specified folder for the latest file and picking up latest change timestamp from the file attributes.
+
+[platforms]
+Unix/Linux
+
+[categories]
+File System
+
+[support]
+5
+
+[tags]
+file system, unix, linux

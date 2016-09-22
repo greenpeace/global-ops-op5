@@ -1,0 +1,26 @@
+[commands]
+check_om_storage=$USER1$/check_om_storage
+
+[name]
+check_om_storage
+
+[info]
+Checks the state of DELL storage using the omreport command from the DELL OpenManage distribution.
+
+[why]
+To make sure you will be notified when there is any problems with the storage in your Dell servers.
+
+[how]
+The communication between op5 Monitor and Dell OpenManage is performed by SNMP. 
+
+[platforms]
+Dell servers.
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+dell, hardware, open manager, storage

@@ -1,0 +1,58 @@
+[commands]
+check_mysql_health_connection-time=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode connection-time --warning $ARG3$ --critical $ARG4$
+check_mysql_health_uptime=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode uptime --warning $ARG3$ --critical $ARG4$
+check_mysql_health_threads-connected=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode threads-connected --warning $ARG3$ --critical $ARG4$
+check_mysql_health_threadcache-hitrate=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode threadcache-hitrate --warning $ARG3$ --critical $ARG4$
+check_mysql_health_threads-created=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode threads-created --warning $ARG3$ --critical $ARG4$
+check_mysql_health_threads-running=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode threads-running --warning $ARG3$ --critical $ARG4$
+check_mysql_health_threads-cached=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode threads-cached --warning $ARG3$ --critical $ARG4$
+check_mysql_health_connects-aborted=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode connects-aborted --warning $ARG3$ --critical $ARG4$
+check_mysql_health_clients-aborted=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode clients-aborted --warning $ARG3$ --critical $ARG4$
+check_mysql_health_slave-lag=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode slave-lag --warning $ARG3$ --critical $ARG4$
+check_mysql_health_slave-io-running=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode slave-io-running
+check_mysql_health_slave-sql-running=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode slave-sql-running
+check_mysql_health_qcache-hitrate=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode qcache-hitrate --warning $ARG3$ --critical $ARG4$
+check_mysql_health_qcache-lowmem-prunes=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode qcache-lowmem-prunes --warning $ARG3$ --critical $ARG4$
+check_mysql_health_myisam_keycache-hitrate=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode keycache-hitrate --warning $ARG3$ --critical $ARG4$
+check_mysql_health_innodb_bufferpool-hitrate=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode bufferpool-hitrate --warning $ARG3$ --critical $ARG4$
+check_mysql_health_innodb_bufferpool-wait-free=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode bufferpool-wait-free --warning $ARG3$ --critical $ARG4$
+check_mysql_health_innodb_log-waits=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode log-waits --warning $ARG3$ --critical $ARG4$
+check_mysql_health_tablecache-hitrate=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode tablecache-hitrate --warning $ARG3$ --critical $ARG4$
+check_mysql_health_table-lock-contention=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode table-lock-contention --warning $ARG3$ --critical $ARG4$
+check_mysql_health_index-usage=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode index-usage --warning $ARG3$ --critical $ARG4$
+check_mysql_health_tmp-disk-tables=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode tmp-disk-tables --warning $ARG3$ --critical $ARG4$
+
+check_mysql_health_table-fragmentation_all=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --database $ARG3$ --mode table-fragmentation --warning $ARG4$ --critical $ARG5$
+check_mysql_health_table-fragmentation=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --database $ARG3$ --mode table-fragmentation --warning $ARG4$ --critical $ARG5$ --name $ARG6$
+
+check_mysql_health_open-files=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode open-files --warning $ARG3$ --critical $ARG4$
+check_mysql_health_slow-queries=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode slow-queries --warning $ARG3$ --critical $ARG4$
+check_mysql_health_long-running-procs=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode long-running-procs --warning $ARG3$ --critical $ARG4$
+check_mysql_health_cluster-ndbd-running=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode cluster-ndbd-running
+
+check_mysql_health_sql_query=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode sql --name "$ARG3$" --name2 "$ARG4$" --warning $ARG5$ --critical $ARG6$
+check_mysql_health_sql_query_custom_units=$USER1$/check_mysql_health --hostname $HOSTADDRESS$ --username $ARG1$ --password $ARG2$ --mode sql --name "$ARG3$" --name2 "$ARG4$" --warning $ARG5$ --critical $ARG6$ --units $ARG7$
+
+[name]
+check_mysql_health
+
+[info]
+Test various parameters of a MySQL database. You may also use custom SQL queries that returns a single number.
+
+[why]
+To catch problems with mysql database servers or specific databases. This could also be used to monitor the data you have in your databases.
+
+[how]
+Connects to a MySQL server and checks status via mainly the "SHOW STATUS" mysql command.
+
+[platforms]
+Not platform dependent
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+mysql, database

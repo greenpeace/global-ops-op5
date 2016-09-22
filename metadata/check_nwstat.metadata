@@ -1,0 +1,27 @@
+[commands]
+check_nwstat=$USER1$/check_nwstat -H $HOSTADDRESS$ -v $ARG1$ -w $ARG2$ -c $ARG3$
+check_nwstat_conns=$USER1$/check_nwstat -H $HOSTADDRESS$ -v CONNS -w $ARG1$ -c $ARG2$
+check_nwstat_load1=$USER1$/check_nwstat -H $HOSTADDRESS$ -v LOAD1 -w $ARG1$ -c $ARG2$
+check_nwstat_load15=$USER1$/check_nwstat -H $HOSTADDRESS$ -v LOAD15 -w $ARG1$ -c $ARG2$
+check_nwstat_load5=$USER1$/check_nwstat -H $HOSTADDRESS$ -v LOAD5 -w $ARG1$ -c $ARG2$
+check_nwstat_uprb=$USER1$/check_nwstat -H $HOSTADDRESS$ -v UPRB -w $ARG1$ -c $ARG2$
+[name]
+check_nwstat
+
+[info]
+Check remote Novel Netware servers running MRTGEXT.NLM.
+[why]
+To check status of your Netware servers.
+[how]
+Connects to the MRTGEXT nlm and gathers information about cpu usage, disk usage and a lot of other things.
+[platforms]
+Novell Netware
+
+[categories]
+Operating Systems
+
+[support]
+5
+
+[tags]
+novel, netwrare, mrtget, os

@@ -1,0 +1,20 @@
+[name]
+check_ls_log_2_1
+
+[info]
+Check status of predefined filters in op5 Logserver <= v. 2.1.
+[why]
+To check the status of a filter.
+[how]
+This plugin is run remotely on the Logserver via NRPE. It takes thresholds for the number of rows that may be returned by a filter.
+[platforms]
+op5 Logserver
+
+[categories]
+Logs
+
+[support]
+4
+
+[tags]
+op5 logserver, logs

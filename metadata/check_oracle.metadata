@@ -1,0 +1,27 @@
+[name]
+check_oracle
+
+[info]
+Check status of a Oracle database.
+[why]
+To see status of your Oracle databases.
+
+[platforms]
+Unix
+
+[commands]
+check_oracle_dummy_login=$USER1$/check_oracle -H $HOSTADDRESS$ -l $ARG1$
+check_oracle_login=$USER1$/check_oracle -H $HOSTADDRESS$ -l $ARG1$ -u $ARG2$ -p $ARG3$
+check_oracle_cache_hit_ratio=$USER1$/check_oracle -H $HOSTADDRESS$ -o CACHEHIT -l "$ARG1$" -u "$ARG2$" -p "$ARG3$" -w "$ARG4$" -c "$ARG5$" -a "$ARG6$"
+check_oracle_cache_hit_ratio_all=$USER1$/check_oracle -H $HOSTADDRESS$ -o CACHEHIT -l "$ARG1$" -u "$ARG2$" -p "$ARG3$" -w "$ARG4$" -c "$ARG5$"
+check_oracle_query=$USER1$/check_oracle -H $HOSTADDRESS$ -o QUERY -l "$ARG1$" -u "$ARG2$" -p "$ARG3$" -w "$ARG4$" -c "$ARG5$" -s "$ARG6$"
+check_oracle_query_regex=$USER1$/check_oracle -H $HOSTADDRESS$ -o QUERY -l "$ARG1$" -u "$ARG2$" -p "$ARG3$" -w "$ARG4$" -c "$ARG5$" -s "$ARG6$" -r "$ARG7$"
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+database, oracle

@@ -1,0 +1,21 @@
+[commands]
+check_nntp=$USER1$/check_nntp -H $HOSTADDRESS$
+[name]
+check_nntp
+
+[info]
+Tests NNTP connections.
+[why]
+To catch problems with an NNTP server
+[how]
+Connects to a NNTP host to test the connection. You can also specify thresholds on responstime.
+[platforms]
+Not platform dependent.
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+nntp, news server

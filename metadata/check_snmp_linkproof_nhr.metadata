@@ -1,0 +1,23 @@
+[name]
+check_snmp_linkproof_nhr
+
+[info]
+Checks Radware linkproof NHR
+
+[why]
+To make sure your load balancing between routers in a "multihomed" environment are working as it is supposed to do.
+
+[how]
+By SNMP.
+
+[platforms]
+Radware linkproof NHR.
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+radware, linkproof nhr, snmp, network

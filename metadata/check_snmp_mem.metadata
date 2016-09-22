@@ -1,0 +1,27 @@
+[name]
+check_snmp_mem
+
+[info]
+Checks memory usage on a number of different platforms using SNMP.
+
+[why]
+This can be usefull to monitor memory usage on hosts where you are not able to install any agents.
+
+[how]
+Memory and swap usage on Linux given by Net-snmp. 
+Memory usage on cisco routers or Pix : the plugin will add all of the memory pool and then checks the warning and critical levels.
+On cisco routeurs, it will add 'IO' and 'Processor' memory
+On Pix, it will check the memory used (one memory pool only on Pix).
+Memory usage on HP Procurve switch.
+
+[platforms]
+Unix/Linux, Cisco routers, Cisco Pix, HP Procurve switch.
+
+[categories]
+SNMP, Memory
+
+[support]
+5
+
+[tags]
+memory, ciso  pix, unix, linux, hp, snmp

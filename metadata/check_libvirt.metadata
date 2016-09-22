@@ -1,0 +1,44 @@
+[commands]
+check_libvirt_kvm_guest_cpu=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -N $ARG2$ -l CPU 
+check_libvirt_kvm_guest_mem=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -N $ARG2$ -l MEM
+check_libvirt_kvm_guest_disk_io=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -N $ARG2$ -l IO
+check_libvirt_kvm_guest_net_io=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -N $ARG2$ -l NET
+check_libvirt_kvm_guest_running=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -l RUNNING -s $ARG2$
+check_libvirt_kvm_host_running=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -l LIST
+check_libvirt_kvm_host_storage_pool=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -l POOL -s $ARG2$
+check_libvirt_kvm_host_volume_all=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -l VOLUME
+check_libvirt_kvm_host_volume=$USER1$/check_libvirt -H qemu+ssh://$ARG1$@$HOSTADDRESS$/system -l VOLUME -s $ARG2$/$ARG3$
+
+check_libvirt_xen_guest_cpu=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -N $ARG2$ -l CPU
+check_libvirt_xen_guest_disk_io=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -N $ARG2$ -l IO
+check_libvirt_xen_guest_mem=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -N $ARG2$ -l MEM
+check_libvirt_xen_guest_net_io=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -N $ARG2$ -l NET
+check_libvirt_xen_guest_running=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -l RUNNING -s $ARG2$
+check_libvirt_xen_host_running=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -l LIST
+check_libvirt_xen_host_storage_pool=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -l POOL -s $ARG2$
+check_libvirt_xen_host_volume=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -l VOLUME -s $ARG2$/$ARG3$
+check_libvirt_xen_host_volume_all=$USER1$/check_libvirt -H xen+ssh://$ARG1$@$HOSTADDRESS$ -l VOLUME
+
+[name]
+check_libvirt
+
+[info]
+Check status of KVM or XEN Server.
+
+[why]
+The plugin checks status (CPU, memory, disk io, ...) of virtual machines running inside KVM or XEN Server and the hosts yourself.
+
+[how]
+The plugin queries status of KVM or XEN Server using the libvirt virtualization API
+
+[platforms]
+KVM Server, XEN Server
+
+[categories]
+Operating Systems
+
+[support]
+4
+
+[tags]
+kvm, xen, libvirt, virtualization, os

@@ -1,0 +1,23 @@
+[name]
+check_sip
+
+[info]
+This plugin test the functionallity of a sip server.
+
+[why]
+To controll that extensions works as they should in your sip server.
+
+[how]
+The plugin makes a call to the sip server to the specified extension to see that it works and returns the response time.
+
+[platforms]
+Sip servers.
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+sip, asterisk

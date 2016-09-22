@@ -1,0 +1,23 @@
+[commands]
+check_ntp_server=$USER1$/check_ntp_peer -H $HOSTADDRESS$ -w 5 -c 10 -j -1:1000 -k -1:2000
+check_ntp_stratum=$USER1$/check_ntp_peer -H $HOSTADDRESS$ -W 4 -C 6
+
+[name]
+check_ntp_peer
+
+[info]
+Check the health of an NTP server.
+[why]
+To make sure the ntp server is in sync with its peers.
+[how]
+Check the health of an NTP server. Lets you set thresholds on accepted offset, jitter
+and stratum.
+
+[platforms]
+Not platform dependent
+
+[support]
+4
+
+[tags]
+ntp, time

@@ -1,0 +1,58 @@
+[commands]
+check-host-alive-nsclient=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v UPTIME -t 5
+check_nt_clientversion=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v CLIENTVERSION
+check_nt_cpuload=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v CPULOAD -l$ARG1$
+check_nt_disk=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v USEDDISKSPACE -l $ARG1$ -w $ARG2$ -c $ARG3$
+check_nt_memuse=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v MEMUSE -w $ARG1$ -c $ARG2$
+check_nt_pagingfile=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\\Paging File(_Total)\\% Usage","Paging File usage is " -w $ARG1$ -c $ARG2$
+check_nt_process=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v PROCSTATE -l $ARG1$
+check_nt_service=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v SERVICESTATE -l "$ARG1$"
+check_nt_uptime=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v UPTIME
+check_mssql_db_file_size=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\SQLServer:Databases($ARG1$)\Data File(s) Size (KB)","Db file for $ARG1$ is: %.2f Kb" -w $ARG2$ -c $ARG3$
+check_mssql_log_file_size=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\SQLServer:Databases($ARG1$)\Log File(s) Size (KB)","Log file for $ARG1$ is: %.2f Kb" -w $ARG2$ -c $ARG3$
+check_nt_memory_page_per_sec=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\Memory\Pages/sec","Pages/sec %.2f" -w $ARG1$ -c $ARG2$
+check_nt_physical_disk_time=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\PhysicalDisk(_Total)\% Disk Time","Physical Disk Time %.2f percent" -w $ARG1$ -c $ARG2$
+check_mssql_cache_hit_ratio=$USER1$/negate --ok=CRITICAL --critical=OK $USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\SQLServer:Cache Manager(_Total)\Cache Hit Ratio","Total Cache Hit Ratio %.2f percent" -c $ARG2$
+check_mssql_num_deadlocks=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\SQLServer:Locks(_Total)\Number of Deadlocks/sec","Num of Deadlocks/sec %.2f" -w $ARG1$ -c $ARG2$
+check_mssql_num_user_connections=$USER1$/check_nt -H $HOSTADDRESS$ -v COUNTER -l "\\SQLServer:General Statistics\User Connections","User Connections %.2f" -w $ARG1$ -c $ARG2$
+
+check_perf_phys_disk_time=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\\Physicaldisk(0 C: D: F: H: E:)\% Disk Time","Disktime: %.f %%" -w $ARG1$ -c $ARG2$
+check_perf_avg_disk_queue_length=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\PhysicalDisc(_Total)\Avg. Disk Queue Length","Avg. Disk Queue Length: %.f" -w $ARG1$ -c $ARG2$
+check_perf_io_read=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process(_Total)\IO Read Bytes/sec","IO Read Bytes/sec:%.f" -w $ARG2$ -c $ARG3$
+check_perf_io_write=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process(_Total)\IO Write Bytes/sec","IO Write Bytes/sec:%.f" -w $ARG2$ -c $ARG3$
+check_perf_memory_pages_per_sec=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Memory\Pages/sec","Memory Pages/sec: %.f" -w $ARG1$ -c $ARG2$
+check_perf_proc_elapsed_time=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Elapsed Time","Elapsed Time: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_id_process=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\ID Process","ID Process: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_pagefile_bytes=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Page File Bytes","Page File Bytes: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_page_faults=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Page Faults/sec","Page Faults: %.f/Sec" -w $ARG2$ -c $ARG3$
+check_perf_proc_pool_nonpaged_bytes=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Pool Nonpaged Bytes","Pool Nonpaged Bytes: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_pool_paged_bytes=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Pool Paged Bytes","Pool Paged Bytes: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_priority_base=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Priority Base","Priority Base:%.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_private_bytes=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Private Bytes","Private Bytes:%.f" -w $ARG1$ -c $ARG2$
+check_perf_proc_thread_count=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Thread Count","Thread Count: %.f" -w $ARG2$ -c $ARG3$
+check_perf_proc_virtual_bytes=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Process($ARG1$)\Virtual Bytes","Virtual Bytes:%.f" -w $ARG2$ -c $ARG3$
+check_perf_terminal_active_sessions=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Terminal Services\Active Sessions","Active Sessions: %.f" -w $ARG1$  -c $ARG2$
+check_perf_terminal_inactive_sessions=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Terminal Services\Inactive Sessions","Inactive Sessions: %.f" -w $ARG1$ -c $ARG2$
+check_perf_terminal_total_sessions=$USER1$/check_nt -H $HOSTADDRESS$ -p 1248 -v COUNTER -l "\Terminal Services\Total Sessions","Total Sessions: %.f" -w $ARG1$ -c $ARG2$
+
+
+[name]
+check_nt
+
+[info]
+Checks remote Windows servers running NSClient
+[why]
+To see status of your windows servers.
+[how]
+Connects to the NSClient service and retreives following information. CPU Usage, Memory Usage, Swap Usage, Disk Usage, Process Status, Service Status. It also lets you run queries against performance counters.
+[platforms]
+Microsoft Windows
+
+[categories]
+Operating Systems
+
+[support]
+6
+
+[tags]
+microsoft windows, nsclient

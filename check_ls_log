@@ -1,0 +1,585 @@
+#! /usr/bin/php
+<?php
+
+# License: GPL
+# Copyright (c) 2007-2009 op5 AB
+# Author: op5 dev team <op5-users@lists.op5.com>
+#
+# For direct contact with any of the op5 developers send a mail to
+# op5-users@lists.op5.com
+# Discussions are directed to the mailing list op5-users@op5.com,
+# see http://lists.op5.com/mailman/listinfo/op5-users
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Syntax:  check_ls_log.php -f <filtername> -i <interval> [-H <hostname>]
+# Description:
+#
+# This plugin works in conjunction with op5 logserver 3.x to check the number of
+# messages that matches the filter given by parameter filtername. The
+# parameter interval specifies the number of minutes back in time that the
+# plugin will check messages.
+#
+# If an optional <hostname> parameter is present, the plugin will only return
+# the number of messages for this host. <hostname> can contain several hosts,
+# separated by space.
+#
+# Examples:
+#
+# 1. Check the number of all log messages for the last 10 minutes.
+# ./check_ls_log.php -f "All Log Messages" -i 10
+#
+# 2. Same as 1, but only for host devel
+# ./check_ls_log.php -f "All Log Messages" -i 10 -H devel
+#
+# 3. Same as 1, but for hosts devel, backup or owl
+# ./check_ls_log.php -f "All Log Messages" -i 10 -H "devel backup owl"
+#
+# 4. Same as 1, output html-links
+# ./check_ls_log.php -f "All Log Messages" -i 10 -u "https://hostname.domain/logserver/"
+#
+
+
+function get_filter_count($filter_name, $timestamp, $hosts, $uri="localhost", $login="", $pass="")
+{
+	$q = "";
+	if (count($hosts) > 0)
+	{
+		$host_str = "(".implode("+", $hosts).")";
+		$q = "&query=host=$host_str";
+	}
+
+	$start = date("Y-m-d+H:i:s", $timestamp);
+	$end = date("Y-m-d+H:i:s", time());
+
+	$fp = fopen('/tmp/check_ls_log.tmplog', 'a');
+	fwrite($fp, "$start - $end\n");
+	fclose($fp);
+
+	if ($uri == "") $uri = "localhost";
+
+	if ($uri != "localhost")
+		$auth="&auth_username=$login&auth_hash=$pass";
+	else
+		$auth="";
+
+	$url = "https://$uri/logserver/comps/inquire/?filter=$filter_name&start_time=$start&end_time=$end&limit=10000000&offset=0$q$auth";
+	$url2 = "https://$uri/logserver/comps/inquire/?filter=$filter_name&start_time=$start&end_time=$end&limit=100&offset=0$q$auth";// put limit equals to 100 for $msgcount output
+
+	$url = str_replace(" ", "+", $url);
+	$url2 = str_replace(" ", "+", $url2);
+
+	$text = file_get_contents($url);
+	$text2 = file_get_contents($url2);
+
+	if ($text == "")
+	{
+		pexit(UNKNOWN, "Connecting to logserver failed.");
+	}
+
+	$out = array();
+	$msg = array();
+	$error = array();
+
+	if (!preg_match('|<!--<fnum>(.*)</fnum>-->|Uis', $text, $out))
+		pexit(UNKNOWN, "Retrieving results from logserver failed: ");
+	preg_match_all('/<td( class=\".*\">|>)(.*)<\/td>/', $text2, $msg);
+	preg_match('|<span class="error">(.*)</span>|', $text, $error);
+
+	if (count($error))
+		pexit(UNKNOWN, "Retrieving results from logserver failed: " . $error[1]);
+
+	$id = 0;
+	$count = 0;
+
+	$column = array(0 => 'sev',
+					1 => 'fac',
+					2 => 'rtime',
+					3 => 'mtime',
+					4 => 'eventid',
+					5 => 'source_ip',
+					6 => 'ident',
+					7 => 'host',
+					8 => 'pid',
+					9 => 'message',
+					10 => 'junk');
+
+	foreach ($msg[2] as $value)
+	{
+		$message[$id][$column[$count]] = $value;
+		$count++;
+
+		if ($count >= 10)
+		{
+			$id++;
+			$count = 0;
+		}
+	}
+
+	return array($out[1], $message, $uri);
+}
+
+function get_all_filters($uri="localhost", $login="", $pass="")
+{
+	if ($uri == "") $uri = "localhost";
+
+	if ($uri != "localhost")
+		$auth="&auth_username=$login&auth_hash=$pass";
+	else
+		$auth="";
+
+	$url = "https://$uri/logserver/comps/filters?action=get_exportable&format=plaintext$auth";
+
+	$url = str_replace(" ", "+", $url);
+
+	print_verbose(3, "Opening URL $url");
+
+	$text = file_get_contents($url);
+
+	if ($text == "")
+	{
+		pexit(UNKNOWN, "Connecting to logserver failed.");
+	}
+
+	foreach ($http_response_header as $header) {
+		if (stripos($header, 'Content-Type') !== false &&
+			stripos($header, 'text/plain') === false)
+		{
+			if (strpos($text, "Login") !== false)
+				pexit(UNKNOWN, "Invalid authentication: check your username and password");
+			$version_url = "https://$uri/logserver/comps/auth/action=get_version";
+			$version = file_get_contents($version_url);
+			$version_parts = explode('.', $version);
+			if ($version_parts[0] < 3 || $version_parts[1] < 6)
+				pexit(UNKNOWN, "Server too old: you need at least version 3.6");
+			pexit(UNKNOWN, "Server returned an invalid response");
+		}
+	}
+
+	return explode("\n", $text);
+}
+
+/*
+ * Represents a range as defined by nagios developer guidelines.
+ *
+ * http://nagiosplug.sourceforge.net/developer-guidelines.html#THRESHOLDFORMAT
+ */
+class Threshold {
+	/* defining the range. integer = limit, inclusive. false = open end
+	 *
+	 * in contrast to the nagios recommendeation, this defines the OK range as.
+	 * lo <= x <= hi
+	 *
+	 * The matches function negates to return as trigger-range (x < lo || hi < x).
+	 */
+	private $hi = false;
+	private $lo = false;
+
+	/* Defines if ranges should be negated */
+	private $neg = false;
+
+	/* Takes one argument, representing the range as defined by nagios guidelines. */
+
+	/* Todo: to make generic (and when copying to a lib) to handle decimal point */
+	public function __construct( $rng ) {
+		if( !preg_match( '/^(@?)(-?[0-9]+|~)(:(-?[0-9]*)|)$/', $rng, $matches ) ) {
+			pexit( UNKNOWN, "Unknown range: '$rng'" );
+		}
+
+		if( $matches[1] == '@' ) { /* Negate */
+			$this->neg = true;
+		}
+
+		if( $matches[3] != '' ) {      /* : in range definition */
+			/* $matches[2] is low field
+			 * $matches[4] is high field
+			 */
+			if( $matches[2] != '~' ) { /* Low end is defined */
+				$this->lo = intval( $matches[2] );
+			}
+			if( $matches[4] !== '' ) { /* High end is defined */
+				$this->hi = intval( $matches[4] );
+			}
+		}
+		else {
+			/* $matches[2] is the value
+			 */
+			$this->lo = 0; /* By definition */
+			if( $matches[2] == '~' ) { /* Error */
+				pexit( UNKNOWN, "Unknown range: '$rng'" );
+			}
+			$this->hi = intval( $matches[2] ); /* High is defined */
+		}
+	}
+
+	/* Tries to match a value to a range. Returning true if an alert should be generated */
+	public function match( $val ) {
+		$inrange = ($this->lo === false || $val >= $this->lo) &&
+		           ($this->hi === false || $val <= $this->hi);
+		if( $this->neg ) {
+			$inrange = !$inrange;
+		}
+
+		/* Match means trigger error, which means outside of range.
+		 * $inrange is true if $val is in range, therefore negation
+		 */
+		return !$inrange;
+	}
+
+	public function getHi() {
+		return $this->hi;
+	}
+}
+
+define("UNKNOWN", 3);
+define("CRITICAL", 2);
+define("WARNING", 1);
+define("OK", 0);
+
+declare(ticks = 1);
+
+/* Default values. */
+$warning = new Threshold( '5' );
+$critical = new Threshold( '10' );
+$verbosity = 0;
+$parse_host_string = false;
+$timeout = "10";
+$url = "";
+$msgsize = 255;
+$msgcount = 1;
+
+/* Dont output debug messages */
+error_reporting(E_ALL ^ (E_USER_NOTICE | E_USER_WARNING | E_WARNING | E_NOTICE));
+
+function usage() {
+	echo "Usage: \n";
+	echo "check_ls_log.php -f <filtername> -i <interval> [-H <hostname>]\n";
+	echo "     [-s <size>] [-m <count>] [-u <url>] [-w <warning>] [-c <critical>] [-t <timeout>] [-v]\n";
+	echo "check_ls_log.php -a\n";
+	echo "\n";
+	echo "Options:\n";
+	echo "   -f, --filtername  - name of the filter to apply\n";
+	echo "   -i, --interval    - check logs this many minutes back\n";
+	echo "   -D, --servicedata - Give the plugin HOSTNAME and SERVICEDESC and you should\n";
+	echo "                       use macros for that and the string shall look\n";
+	echo "                       like this:\n";
+	echo "                       \$HOSTNAME\$::\$SERVICEDESC\$\n";
+	echo "   -H, --hostname    - hostname(s) to apply this filter to\n";
+	echo "   -r, --remotehost  - remote logserver\n";
+	echo "   -l, --login       - login for remote logserver\n";
+	echo "   -p, --pass        - password for remote logserver\n";
+	echo "   -u, --url         - hostname of the logserver to append as a link to the log to html-output.\n";
+	echo "   -s, --msgsize     - number of chars to display for each message: default 255\n";
+	echo "   -m, --msgcount    - number of messages to display: default 1\n";
+	echo "   -w, --warning     - warning threshold: default 5\n";
+	echo "   -c, --critical    - critical threshold: default 10\n";
+	echo "   -t, --timeout     - seconds before plugin times out: default 10\n";
+	echo "   -v, --verbose     - increase verbosity\n";
+	echo "   -a, --all-filters - list all available filters in server\n";
+	echo "\n";
+	echo "filtername and interval are required, unless all-filters is given.\n";
+	echo "\n";
+	echo "Hostname is a string of hosts, delimited by spaces. If specified, the\n";
+	echo "normal host-selection for this filter does not apply.\n";
+	echo "\n";
+	echo "The tresholds are treated as a lower limit of number of matches that triggers\n";
+	echo "the warning/critical. Tresholds can also be specified as a range which triggers\n";
+	echo "the state, in syntax 'lo:hi', which matches with lo:hi inclusive. If either lo or hi\n";
+	echo "is omitted, that end is treated as an open range.\n";
+	echo "\n";
+}
+
+function pexit($result_code, $message, $print_usage = false) {
+	$result_names = array("OK", "WARNING", "CRITICAL", "UNKNOWN");
+
+	printf("%s - %s\n", $result_names[$result_code], $message);
+	if ($print_usage) {
+		echo "\n";
+		usage();
+	}
+	exit($result_code);
+}
+
+function print_verbose($level, $message)
+{
+	global $verbosity;
+	if ($verbosity > $level) {
+		echo $message . "\n";
+	}
+}
+
+function microtime_float()
+{
+	list($usec, $sec) = explode(" ", microtime());
+	return ((float) $usec + (float) $sec);
+}
+
+function parse_arguments() {
+	global $argv;
+	$progname = array_shift($argv);
+	global $filter_name, $warning, $critical;
+	global $verbosity, $interval, $host_string, $parse_host_string;
+	global $timeout, $url, $remote, $login, $pass, $msgsize, $msgcount;
+	global $service_data;
+	global $all_filters;
+
+	while (count($argv) > 0)
+	{
+		$p_switch = array_shift($argv);
+		if (in_array($p_switch, array("-f", "--filtername"))) {
+			$filter_name = array_shift($argv);
+		} else if (in_array($p_switch, array("-i", "--interval"))) {
+			$interval = array_shift($argv);
+			print_verbose(2, "Got interval arg: " . $interval);
+		} else if (in_array($p_switch, array("-D", "--servicedata"))) {
+			$service_data = array_shift($argv);
+			print_verbose(2, "Got service_data arg: " . $service_data);
+		} else if (in_array($p_switch, array("-H", "--hostname"))) {
+			$parse_host_string = true;
+			$host_string = array_shift($argv);
+		} else if (in_array($p_switch, array("-r", "--remotehost"))) {
+			$remote = array_shift($argv);
+		} else if (in_array($p_switch, array("-l", "--login"))) {
+			$login = array_shift($argv);
+		} else if (in_array($p_switch, array("-p", "--pass"))) {
+			$pass = array_shift($argv);
+		} else if (in_array($p_switch, array("-u", "--url"))) {
+			$url = array_shift($argv);
+		} else if (in_array($p_switch, array("-h", "--help"))) {
+			usage();
+			exit(UNKNOWN);
+		} else if (in_array($p_switch, array("-w", "--warning"))) {
+			$warning = new Threshold( array_shift($argv) );
+		} else if (in_array($p_switch, array("-c", "--critical"))) {
+			$critical = new Threshold( array_shift($argv) );
+		} else if (in_array($p_switch, array("-t", "--timeout"))) {
+			$timeout = array_shift($argv);
+		} else if (in_array($p_switch, array("-s", "--msgsize"))) {
+			$msgsize = array_shift($argv);
+		} else if (in_array($p_switch, array("-m", "--msgcount"))) {
+			$msgcount = array_shift($argv);
+		} else if (in_array($p_switch, array("-v", "--verbose"))) {
+			$verbosity = array_shift($argv);
+		} else if (in_array($p_switch, array("-a", "--all-filters"))) {
+			$all_filters = true;
+		} else {
+			echo "Unknown argument $p_switch\n";
+			exit(3);
+		}
+	}
+}
+
+function get_start_timestamp($host_name, $service_descr) {
+	$timestamp_file = "/opt/monitor/var/check_ls_log-" . $host_name . "_" . $service_descr . ".timestamp";
+
+	if (is_readable($timestamp_file)) {
+		$fhandle = fopen($timestamp_file, 'r');
+		$content = fread($fhandle, filesize($timestamp_file));
+		fclose($fhandle);
+
+		return $content;
+	} else {
+		return 0;
+	}
+}
+
+function set_start_timestamp($host_name, $service_descr, $start_unix_timestamp) {
+	$timestamp_file = "/opt/monitor/var/check_ls_log-" . $host_name . "_" . $service_descr . ".timestamp";
+	$f = fopen($timestamp_file, 'w');
+	fwrite($f, $start_unix_timestamp);
+	fclose($f);
+}
+
+/* Start with argument parsing, so you can get help without db connection */
+parse_arguments();
+
+/* Start of main program */
+$service_info = array();
+if (isset($service_data)) {
+	$service_info = explode('::', $service_data);
+}
+
+/**
+  * If we got the servicedesc and hostname from macros in the commandline
+  * Connect to the merlin database and get some data about the last check.
+  *
+  */
+$last_check_data = array();
+if (sizeof($service_info) == 2) {
+	define("DB_USERNAME", "merlin");
+	define("DB_PASSWORD", "merlin");
+	define("DB_DATABASE", "merlin");
+
+	$dbconn = mysql_connect('localhost', DB_USERNAME, DB_PASSWORD) or pexit(UNKNOWN, sprintf("Unable to connect to database: %s", DB_DATABASE));
+	mysql_select_db(DB_DATABASE, $dbconn) or pexit(UNKNOWN, sprintf("Unable to select database: %s", DB_DATABASE));
+	$last_check_data_query  = "select last_check, current_state, check_type from service " .
+							   "where host_name = '" . $service_info[0] . "' and service_description = '" . $service_info[1] . "'";
+	$last_check_data_result = mysql_query($last_check_data_query, $dbconn);
+	$last_check_data = mysql_fetch_assoc($last_check_data_result);
+	mysql_close($dbconn);
+}
+
+if (!isset($filter_name) && !isset($all_filters)) {
+	pexit(UNKNOWN, "Missing filtername.", true);
+}
+
+if (isset($interval)) {
+	if (!ctype_digit($interval))
+	{
+		pexit(UNKNOWN, sprintf("Not a valid interval: %s", $interval), true);
+	}
+
+	if ($last_check_data['check_type'] == 1 && $last_check_data['current_state'] == 0) {
+		$timestamp = $last_check_data['last_check'];
+	} elseif ($last_check_data['current_state'] == 6) {
+		$timestamp = time();
+	} else {
+		$timestamp_from_file = get_start_timestamp($service_info[0], $service_info[1]);
+
+		$timestamp = time() - (60 * intval($interval));
+
+		if ($timestamp < $timestamp_from_file) {
+			$timestamp = $timestamp_from_file;
+		}
+
+	}
+
+}
+elseif (!isset($all_filters))
+{
+	pexit(UNKNOWN, "Missing interval or unix_timestamp argument.", true);
+}
+
+if (!ctype_digit($timeout))
+{
+	pexit(UNKNOWN, sprintf("Not a valid timeout parameter: %s", $timeout));
+}
+$timeout = intval($timeout);
+
+if ($remote != "" && ($login == "" || $pass == ""))
+{
+	pexit(UNKNOWN, "Connecting to remote logserver failed. You missed login or password.", true);
+}
+
+/* Parse the host-string. Individual hosts are separated by space. */
+$hosts = array();
+if ($parse_host_string) {
+	/* Break up by space, string to array */
+	$hosts = explode(" ", $host_string);
+	$new_hosts = array();
+	foreach ($hosts as $host) {
+		/* Only add hostname if it is nonempty */
+		$tmp = trim($host);
+		if ($tmp != "")
+			$new_hosts[] = $tmp;
+	}
+	$hosts = $new_hosts;
+	print_verbose(1, sprintf("Found hosts: %s", implode(" ", $hosts)));
+	if (count($hosts) < 1) { /* Need at least one host */
+		pexit(UNKNOWN, "No hosts given.", true);
+	}
+}
+
+if ($remote != "")
+{
+	print_verbose(2, "Remote logserver: " . $remote);
+}
+
+if ($login != "" && $pass != "")
+{
+	print_verbose(2, "Your login: " . $login);
+}
+
+$query_start_time = microtime_float();
+if (isset($all_filters))
+{
+	$filters = get_all_filters($remote, $login, $pass);
+	pexit(OK, "'" . implode("', '", $filters) . "'");
+}
+
+list($result_count, $message, $full_url) = get_filter_count($filter_name, $timestamp, $hosts, $remote, $login, $pass);
+
+function timeout_signal_handler ($signal)
+{
+	pexit(UNKNOWN, "Plugin timed out.");
+}
+
+if ($result_count == "Unknown")
+	pexit(UNKNOWN, "Filter doesn't exist.");
+
+print_verbose(1, sprintf("Timeout set to %d seconds", $timeout));
+pcntl_alarm($timeout);
+pcntl_signal(SIGALRM, "timeout_signal_handler", true);
+print_verbose(1, sprintf("Trying to find named query '%s'\n", $filter_name));
+
+
+$result_string = sprintf("%d matches for ", $result_count);
+
+if (count($hosts) > 0)
+{
+	$result_string .= sprintf("filter '%s' with hosts: %s", $filter_name, implode(" ", $hosts));
+}
+else
+{
+	$result_string .= sprintf("general filter '%s'", $filter_name);
+}
+
+if ($url != "" && $result_count != 0)
+{
+	$result_string .= sprintf('\n<a href="%s" target="_MON_LS_VIEW">Show log</a>',"https://$url/logserver/view?filter=$filter_name");
+}
+
+/* Adding an url to the "send passive result" -page in op5 Monitor */
+if (sizeof($service_info) == 2 && $result_count != 0 ) {
+	$restore_url    = "/monitor/index.php/command/submit?cmd_typ=PROCESS_SERVICE_CHECK_RESULT&host_name=";
+	$restore_url   .= str_replace(' ', '+', $service_info[0]);
+	$restore_url   .= "&service=";
+	$restore_url   .= str_replace(' ', '+', $service_info[1]);
+	$restore_url   .= "&plugin_output=The+Service+has+been+manualy+reset";
+
+	$restore_title  = "Click to restore the service by send a passive check result";
+
+	$result_string .= ' <a href="' . $restore_url . '" title="' . $restore_title . '">Clear the service.</a>\n\n';
+}
+
+$query_exec_time = microtime_float() - $query_start_time;
+
+if ($msgcount > $result_count)
+	$msgcount = $result_count;
+if ($msgcount > 100)
+	$msgcount = 100;
+
+if ($result_count > 0)
+	$host_and_msg = ' Host: ' . $message[0]['host'] . ': ' . substr($message[0]['message'], 0, $msgsize);
+
+for ($i = 1; $i < $msgcount; $i++)
+	$host_and_msg .= ',Host: ' . $message[$i]['host'] . ': ' . substr($message[$i]['message'], 0, $msgsize);
+
+
+/* Add performance data. */
+$result_string .= ":" . $host_and_msg . sprintf("|query_time=%.2fms nr_matches=%d;%d;%d\n",
+				  (1000 * $query_exec_time), $result_count,
+				  $warning->getHi(), $critical->getHi()); /* FIXME: what should it print out? */
+
+/* Setting the next start timestamp if the restul_count was 0 */
+if ($last_check_data['current_state'] == 6) {
+	set_start_timestamp($service_info[0], $service_info[1], $timestamp);
+} elseif (sizeof($service_info) == 2 && $last_check_data['current_state'] == 0 && ($result_count == 0 || $last_check_data['check_type'] == 1)) {
+	set_start_timestamp($service_info[0], $service_info[1], $last_check_data['last_check']);
+}
+
+if ( $critical->match($result_count) ) pexit(CRITICAL, $result_string);
+if ( $warning->match($result_count) )  pexit(WARNING, $result_string);
+pexit(OK, $result_string);
+
+?>

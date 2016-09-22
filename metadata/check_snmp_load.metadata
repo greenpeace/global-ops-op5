@@ -1,0 +1,29 @@
+[commands]
+check_snmp_win_load=$USER1$/check_snmp_load  -H $HOSTADDRESS$ -C $ARG1$  -w $ARG2$  -c $ARG3$  -T stand
+check_snmp_load=$USER1$/check_snmp_load -H $HOSTADDRESS$ -2 -C $ARG1$ -w $ARG2$ -c $ARG3$ -T $ARG4$
+[name]
+check_snmp_load
+
+[info]
+Checks cpu or load average on a number of different platforms.
+
+[why]
+This can be usefull to monitor cpu or load average on hosts where you are not able to install any agents.
+
+[how]
+By SNMP.
+
+[platforms]
+Windows, Unix/Linux, AS400, Cisco, Cisco catalyst, HP Procurve, LinkProof, Blucoat, Nokia, Fortinet, Netscreen
+
+[categories]
+CPU
+
+[categories]
+SNMP
+
+[support]
+5
+
+[tags]
+cpu, load, snmp, microsoft windows, unix, linux, cisco, hp, linkproof, nokia, net screen, fortinet, blucoat, as400

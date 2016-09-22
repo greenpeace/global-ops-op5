@@ -1,0 +1,20 @@
+[name]
+check_users
+
+[info]
+Check the amount of users logged in.
+[why]
+To keep track of the amount of users logged on to a system. If to many are logged on you might have been hacked for example.
+[how]
+Check for the amount of users that are logged on to the system and specify treshold values for how many that is accepted.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+linux, unix, users, logged in

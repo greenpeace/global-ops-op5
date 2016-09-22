@@ -1,0 +1,23 @@
+[name]
+check_maxdb
+
+[info]
+Checking the status of you MaxDB servers.
+
+[why]
+To make sure you MaxDB servers are up and running.
+
+[how]
+Connects to the MaxDB database by using the unix command 'dbmcli' and parse the result.
+It may check problem with backups, log fillrate and custom strings in the 'INFO State' result set.
+
+[platforms]
+
+[categories]
+Databases
+
+[support]
+6
+
+[tags]
+database, maxdb

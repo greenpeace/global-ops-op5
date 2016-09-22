@@ -1,0 +1,23 @@
+[name]
+check_cpu_iowait_aix
+
+[info]
+Check cpu io wait on an IBM AIX.
+
+[why]
+To monitor that the cpu iowait looks at is should.
+
+[how]
+The CPU iowait is calculated with help from the command iostat.
+
+[platforms]
+IBM AIX
+
+[categories]
+CPU
+
+[support]
+6
+
+[tags]
+ibm, aix, cpu, iowait, iostat

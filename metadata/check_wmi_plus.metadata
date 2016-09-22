@@ -1,0 +1,53 @@
+[commands]
+check_wmip=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -m $ARG3$ -s $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$ $ARG9$
+check_wmip_io=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkio -u $ARG1$ -p $ARG2$ -s $ARG3$ -a "$ARG4$" $ARG5$ $ARG6$
+check_wmip_filesize=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkfilesize -u $ARG1$ -p $ARG2$ -a $ARG3$ -w $ARG4$ -c $ARG5$ $ARG6$ $ARG7$
+check_wmip_fileage=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkfileage -u $ARG1$ -p $ARG2$ -a '$ARG3$' -w $ARG4$ -c $ARG5$ $ARG6$ $ARG7$
+check_wmip_disk=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkdrivesize -u $ARG1$ -p $ARG2$ -a $ARG3$ -w $ARG4$ -c $ARG5$ $ARG6$ $ARG7$
+check_wmip_cpuq=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkcpuq -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_cpu=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkcpu -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_cpudetail=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkeachcpu -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_network=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checknetwork -u $ARG1$ -p $ARG2$ -a '$ARG3$' $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_service=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkservice -u $ARG1$ -p $ARG2$ -a '$ARG3$' -o '$ARG4$' -c 0 $ARG5$ $ARG6$
+check_wmip_uptime=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkuptime -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_mem=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkmem -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_page=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkpage -u $ARG1$ -p $ARG2$ -w $ARG3$ -c $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_process=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkprocess -u $ARG1$ -p $ARG2$ -a "$ARG3$" -3 '$ARG4$' -w "$ARG5$" -c $ARG6$ $ARG7$ $ARG8$
+check_wmip_eventlog=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkeventlog -u $ARG1$ -p $ARG2$ -a $ARG3$ -o $ARG4$ -3 $ARG5$ -w $ARG6$ -c $ARG7$ $ARG8$ $ARG9$
+check_wmip_ts=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkts -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_iis=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkiis -u $ARG1$ -p $ARG2$ -s $ARG3$ -a $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_exchange=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkexchange -u $ARG1$ -p $ARG2$ -s $ARG3$ -a $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_sql=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checksql -u $ARG1$ -p $ARG2$ -s $ARG3$ -a $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_sql_express=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checksqlex -u $ARG1$ -p $ARG2$ -s $ARG3$ -a $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_proc=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkproc -u $ARG1$ -p $ARG2$ -s $ARG3$ -a $ARG4$ $ARG5$ $ARG6$ $ARG7$
+check_wmip_dns=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkdns -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_dhcp=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkdhcp -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_dhcpv6=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkdhcpv6 -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_print=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkprint -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_users=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkusers -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_power=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkpower -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+check_wmip_ad=$USER1$/check_wmi_plus.pl -H $HOSTADDRESS$ -m checkad -u $ARG1$ -p $ARG2$ -s $ARG3$ $ARG4$ $ARG5$ $ARG6$ $ARG7$ $ARG8$
+
+
+
+[name]
+check_wmi_plus
+
+[info]
+Check status of Windows servers using WMI (Agent less)
+
+[how]
+The plugin queries status of Windows servers using the WMI api
+
+[platforms]
+Windows
+
+
+[categories]
+Operating Systems
+
+[support]
+5
+
+[tags]
+microsoft windows, wmi, agent less, os

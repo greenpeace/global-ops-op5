@@ -1,0 +1,30 @@
+[commands]
+check_by_snmp_disk_list_available_disks_v2=$USER1$/check_by_snmp_disk -H $HOSTADDRESS$ -C '$ARG1$' -P 2c --list
+check_by_snmp_disk_used_v2=$USER1$/check_by_snmp_disk -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_list_available_disks_v3=$USER1$/check_by_snmp_disk -H $HOSTADDRESS$ $ARG1$ -P 3 --list 
+check_by_snmp_disk_used_v3=$USER1$/check_by_snmp_disk -H $HOSTADDRESS$ $ARG1$ -P 3 -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_custom=$USER1$/check_by_snmp_disk $ARG1$
+
+[name]
+check_by_snmp_disk
+
+[info]
+Checks disk information on harddrives using SNMP.
+
+[why]
+This can be usefull to monitor disk usage on hosts where you are not able to install any agents.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Unix/Linux
+
+[categories]
+SNMP, File System
+
+[support]
+5
+
+[tags]
+unix, linux, snmp, net-snmp, storage, disk, hardware

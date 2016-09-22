@@ -1,0 +1,31 @@
+[commands]
+check_http_xpath=$USER1$/check_http_xpath -H $HOSTADDRESS$ -I '$ARG1$' -p $ARG2$ -u '$ARG3$' -s -w '$ARG4$' -c '$ARG5$'
+check_http_xpath_ssl=$USER1$/check_http_xpath -H $HOSTADDRESS$ -I '$ARG1$' -p $ARG2$ -u '$ARG3$' -S -s -w '$ARG4$' -c '$ARG5$'
+check_http_xpath_custom=$USER1$/check_http_xpath $ARG1$
+
+[name]
+check_http_xpath
+
+[info]
+Check an XML web page for specific content using the XML XPATH syntax.
+
+[why]
+The check_http_xpath plugin can be used to check for the presence or absence of specific information in an XML document which is fetched via http.
+
+[how]
+The text to be searched for is specified in the XML XPATH format on the command-line. Multiple XPATH checks can be done in one operation.
+
+Checks can be any of == != > < <= >= =~ !~
+If no operator is specified, the XPATH must simply exist.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+5
+
+[tags]
+http, xpath, xml

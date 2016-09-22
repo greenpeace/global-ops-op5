@@ -1,0 +1,39 @@
+[commands]
+check_ipmi_sensor_fan=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T FAN
+check_ipmi_sensor_platform_sequrity=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T PLATFORM_SECURITY_VIOLATION_ATTEMPT
+check_ipmi_sensor_power_supply=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T POWER_SUPPLY
+check_ipmi_sensor_power_unit=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T POWER_UNIT
+check_ipmi_sensor_memory=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T MEMORY
+check_ipmi_sensor_drive_slot=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T DRIVE_SLOT
+check_ipmi_sensor_system_firmware_progress=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T SYSTEM_FIRMWARE_PROGRESS
+check_ipmi_sensor_system_event=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T SYSTEM_EVENT
+check_ipmi_sensor_critical_interrupt=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T CRITICAL_INTERRUPT
+check_ipmi_sensor_module_board=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T MODULE_BOARD
+check_ipmi_sensor_slot_connector=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T SLOT_CONNECTOR
+check_ipmi_sensor_temperature=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T TEMPERATURE
+check_ipmi_sensor_current=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T CURRENT
+check_ipmi_sensor_voltage=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T VOLTAGE
+check_ipmi_sensor_processor=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T PROCESSOR
+check_ipmi_sensor_watchdog2=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T WATCHDOG2
+check_ipmi_sensor_physical_security=$USER1$/check_ipmi_sensor -H $HOSTADDRESS$ -U $ARG1$ -P $ARG2$ -L user -O "-c /opt/monitor/var/ipmi" -b -T PHYSICAL_SECURITY
+
+[name]
+check_ipmi_sensors
+
+[info]
+Plugin for checking hardware status (fans, voltage, etc). Locally or remotely using freeipmi.
+
+[why]
+To get control over the hardware on your server.
+
+[platforms]
+Devices supporting IPMI via 'Serial over LAN'
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+ipmi, hardware, linux, freeipmi, linux

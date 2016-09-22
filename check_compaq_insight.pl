@@ -1,0 +1,1 @@
+check_compaq_insight

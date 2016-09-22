@@ -1,0 +1,22 @@
+[commands]
+check_ftp=$USER1$/check_ftp -H $HOSTADDRESS$
+[name]
+check_ftp
+
+[info]
+Checks status of a FTP Server.
+[why]
+To see that the FTP server is working.
+[how]
+By connecting to the FTP server and expecting a correct responce. You can also set thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+ftp, tcp

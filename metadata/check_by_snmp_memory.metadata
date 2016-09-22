@@ -1,0 +1,30 @@
+[commands]
+check_by_snmp_memory_ram_used_v2=$USER1$/check_by_snmp_memory -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T ram_used -m $ARG2$ -w$ARG3$ -c$ARG4$
+check_by_snmp_memory_swap_used_v2=$USER1$/check_by_snmp_memory -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T swap_used -m $ARG2$ -w$ARG3$ -c$ARG4$
+check_by_snmp_memory_ram_used_v3=$USER1$/check_by_snmp_memory -H $HOSTADDRESS$ $ARG1$ -P 3 -T ram_used -m $ARG2$ -w$ARG3$ -c$ARG4$
+check_by_snmp_memory_swap_used_v3=$USER1$/check_by_snmp_memory -H $HOSTADDRESS$ $ARG1$ -P 3 -T swap_used -m $ARG2$ -w$ARG3$ -c$ARG4$
+check_by_snmp_memory_custom=$USER1$/check_by_snmp_memory $ARG1$
+
+[name]
+check_by_snmp_memory
+
+[info]
+Checks memory usage on Unix/Linux platforms using SNMP.
+
+[why]
+This can be usefull to monitor memory usage on hosts where you are not able to install any agents.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Unix/Linux
+
+[categories]
+SNMP, Memory
+
+[support]
+5
+
+[tags]
+unix, linux, snmp, net-snmp, memory, swap, buffer, cached

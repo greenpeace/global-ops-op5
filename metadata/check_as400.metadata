@@ -1,0 +1,23 @@
+[name]
+check_as400
+
+[info]
+This plugin check various AS400 related system information.
+
+[why]
+To help you make sure your Movex system is running as it is suposed.
+
+[how]
+It does so by connecting to the as400 using telnet. The plugin uses the oms400/ods400 commands on the target machone.
+
+[platforms]
+AS400
+
+[categories]
+Operating Systems
+
+[support]
+6
+
+[tags]
+as400, oms400, ods400, movex

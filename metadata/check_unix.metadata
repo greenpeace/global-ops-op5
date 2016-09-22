@@ -1,0 +1,25 @@
+[name]
+check_unix
+
+[info]
+It is an op5 Monitor plugin that checks a remote unix host via SSH or other
+remote shell.
+
+[why]
+To automatically monitor the status of your UPS'es and get notified in case of an outage.
+
+[how]
+Checks status on UPS'es. You can check batterystatus, temperature, battery load etc.
+
+[platforms]
+UPS with RFC1628 SNMP support
+
+
+[categories]
+Operating systems
+
+[support]
+6
+
+[tags]
+linux, unix, ssh, remote shell

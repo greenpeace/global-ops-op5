@@ -1,0 +1,25 @@
+[commands]
+check_op5_logserver_filter=$USER1$/check_ls_log -D '$HOSTNAME$::$SERVICEDESC$' -f $ARG1$ -i $ARG2$ -r $ARG3$ -l $ARG4$ -p $ARG5$ -u $ARG6$ -w $ARG7$ -c $ARG8$
+check_op5_logserver_filter_static_interval=$USER1$/check_ls_log -f $ARG1$ -i $ARG2$ -r $ARG3$ -l $ARG4$ -p $ARG5$ -u $ARG6$ -w $ARG7$ -c $ARG8$
+check_ls_log=$USER1$/check_ls_log -f $ARG1$ -i $ARG2$ -r $ARG5$ -l $ARG3$ -p $ARG4$ -H $HOSTADDRESS$
+
+[name]
+check_ls_log
+
+[info]
+Check status of predefined filters in op5 Logserver > v. 2.1
+[why]
+To check the status of a filter.
+[how]
+This plugin is run remotely on the Logserver via NRPE. It takes thresholds for the number of rows that may be returned by a filter.
+[platforms]
+op5 Logserver
+
+[categories]
+Logs
+
+[support]
+4
+
+[tags]
+op5 logserver, logs

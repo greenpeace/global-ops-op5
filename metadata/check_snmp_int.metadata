@@ -1,0 +1,23 @@
+[name]
+check_snmp_int
+
+[info]
+The plugin checks host interface state and usage.
+
+[why]
+For example to get notified if you suddenly have strange traffic pattern in you network, eg virus attack or if an interface or to help you locate network problems.
+
+[how]
+The plugin check interface operationnal status over SNMP using the MIB-II table.
+
+[platforms]
+Not platform depended.
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+network interface, status, snmp

@@ -1,0 +1,23 @@
+[name]
+check_pf
+
+[info]
+This plugins checks hardware like fan, cpu etc on your PacketFront router (CPS).
+
+[why]
+To make sure the hardware on your PacketFront router works as supposed.
+
+[how]
+By SNMP.
+
+[platforms]
+PacketFront routers
+
+[categories]
+Hardware, Networking
+
+[support]
+5
+
+[tags]
+router, packetfront, cps, hardware, network

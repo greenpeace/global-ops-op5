@@ -1,0 +1,31 @@
+[commands]
+check_op5_listview_filter=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -U '$ARG1$' -P $ARG2$ -f '$ARG3$' -w $ARG4$ -c $ARG5$
+check_op5_listview_filter_auth_file=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -a $ARG1$ -f '$ARG2$' -w $ARG3$ -c $ARG4$
+check_op5_listview_filter_custom_status_label=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -U '$ARG1$' -P $ARG2$ -f '$ARG3$' -s '$ARG4$' -l '$ARG5$' -w $ARG6$ -c $ARG7$
+check_op5_listview_filter_custom_status_label_auth_file=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -a $ARG1$ -f '$ARG2$' -s '$ARG3$' -l '$ARG4$' -w $ARG5$ -c $ARG6$
+check_op5_listview_log_messages_filter=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -U '$ARG1$' -P $ARG2$ -f '$ARG3$' -s '$ARG4$' -l '$ARG5$' -w $ARG6$ -c $ARG7$ -C msg -S rtime
+check_op5_listview_log_messages_filter_msg_last_servicecheck=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -U '$ARG1$' -P $ARG2$ -f '[log_messages] msg ~~"$ARG3$" and rtime > date("\@$LASTSERVICECHECK$")' -w $ARG4$ -c $ARG5$ -C msg -S rtime
+check_op5_listview_log_messages_filter_auth_file=$USER1$/check_op5_filter -H $HOSTADDRESS$ -p 443 -a $ARG1$ -f '$ARG2$' -s '$ARG3$' -l '$ARG4$' -w $ARG5$ -c $ARG6$ -C msg -S rtime
+check_op5_listview_log_messages_filter_custom_host=$USER1$/check_op5_filter -H $ARG1$ -p 443 -U '$ARG2$' -P $ARG3$ -f '$ARG4$' -s '$ARG5$' -l '$ARG6$' -w $ARG7$ -c $ARG8$ -C msg -S rtime
+check_op5_listview_log_messages_filter_custom_host_auth_file=$USER1$/check_op5_filter -H $ARG1$ -p 443 -a $ARG2$ -f '$ARG3$' -s '$ARG4$' -l '$ARG5$' -w $ARG6$ -c $ARG7$ -C msg -S rtime
+
+[name]
+check_op5_filter
+
+[info]
+Allows you to monitor op5 Monitor list view filters. The plugin counts the number of hits you get from a filter you have provided. It is mainly supposed to be used for monitoring logserver filters in op5 Monitor but could be used for other types of list viwes in op5 Monitor as well.
+
+[why]
+This to make it possible to monitor the content of log data sent to the op5 Monitor extension op5 LogServer.
+
+[how]
+The plugin will connect to the op5 Monitor API and query the filter provided as argument to the plugin.
+
+[platforms]
+op5 Monitor server
+
+[support]
+4
+
+[tags]
+op5, list view, filter, logserver

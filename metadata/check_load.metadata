@@ -1,0 +1,20 @@
+[name]
+check_load
+
+[info]
+Checks system load on a unix server.
+[why]
+This makes it easy to see if there is a problem with the capcity of a server and if and when you need to upgrade.
+[how]
+By checking the amount of jobs in the processor queue. A load of 1 means that the processor always has one job in the queue on a singleprocessor system. The plugin lets you specify thresholds on load values.
+[platforms]
+Unix
+
+[categories]
+CPU
+
+[support]
+4
+
+[tags]
+unix, linux, cpu, load

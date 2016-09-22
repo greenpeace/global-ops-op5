@@ -1,0 +1,24 @@
+[name]
+check_disk_smb
+
+[info]
+Check Disk usage on a SMB partition.
+
+[why]
+To keep track of disk usage and get notified before disks fill up.
+
+[how]
+By using the smbclient program and connecting to the smb share.
+
+[platforms]
+Not platform dependent.
+
+
+[categories]
+File System
+
+[support]
+4
+
+[tags]
+microsoft windows, linux, samba, smb, disk

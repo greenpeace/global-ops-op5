@@ -1,0 +1,25 @@
+[commands]
+check_ssh=$USER1$/check_ssh -t $ARG1$ $HOSTADDRESS$
+check_ssh_10=$USER1$/check_ssh -t 10 $HOSTADDRESS$
+check_ssh_5=$USER1$/check_ssh -t 5 $HOSTADDRESS$
+
+[name]
+check_ssh
+
+[info]
+Checks a SSH server.
+[why]
+To check status of your SSH servers.
+[how]
+Connects to a SSH server and checks for an expected response. Let you specify what version to check for and also set thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+ssh, ssh connection, tcp

@@ -1,0 +1,38 @@
+[commands]
+check_email_delivery=$USER1$/check_email_delivery -H $HOSTADDRESS$ --mailfrom $ARG1$ --mailto $ARG2$ --username $ARG3$ --password $ARG4$ --libexec $USER1$ -w $ARG5$ -c $ARG6$ --header 'Subject: op5 Monitor Test'
+check_email_delivery_ssl=$USER1$/check_email_delivery -H $HOSTADDRESS$ --mailfrom $ARG1$ --mailto $ARG2$ --username $ARG3$ --password $ARG4$ --libexec $USER1$ -w $ARG5$ -c $ARG6$ --ssl --header 'Subject: op5 Monitor Test'
+check_email_delivery_tls=$USER1$/check_email_delivery -H $HOSTADDRESS$ --mailfrom $ARG1$ --mailto $ARG2$ --username $ARG3$ --password $ARG4$ --libexec $USER1$ -w $ARG5$ -c $ARG6$ --tls --header 'Subject: op5 Monitor Test'
+check_email_delivery_smtp=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ -U $ARG3$ -P $ARG4$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_smtp_ssl=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ -U $ARG3$ -P $ARG4$ --ssl --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap_ssl=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ --ssl -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_smtp_tls=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ -U $ARG3$ -P $ARG4$ --tls --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap_tls=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ --tls -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_smtp_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ --auth $ARG6$ -U $ARG3$ -P $ARG4$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ --auth $ARG6$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_smtp_ssl_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ --auth $ARG6$ -U $ARG3$ -P $ARG4$ --ssl --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap_ssl_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ --auth $ARG6$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ --ssl -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_smtp_tls_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $HOSTADDRESS$ --mailto $ARG1$ --mailfrom $ARG2$ --auth $ARG6$ -U $ARG3$ -P $ARG4$ --tls --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $ARG5$ -U $ARG3$ -P $ARG4$ -s SUBJECT -s 'op5 Monitor Test'"
+check_email_delivery_imap_tls_smtpauth=$USER1$/check_email_delivery --plugin "$USER1$/check_smtp_send -H $ARG1$ --mailto $ARG2$ --mailfrom $ARG3$ --auth $ARG6$ -U $ARG4$ -P $ARG5$ --header 'Subject: op5 Monitor Test'" --plugin "$USER1$/check_imap_receive -H $HOSTADDRESS$ -U $ARG4$ -P $ARG5$ --tls -s SUBJECT -s 'op5 Monitor Test'"
+
+[name]
+check_email_delivery
+
+[info]
+Sends email and verifies delivery.
+[why]
+The plugin checks full email send/delivery loop
+[how]
+Sends email via SMTP and verifies delivery over IMAP.
+[platforms]
+Not platform dependent.
+
+
+[categories]
+Mail
+
+[support]
+4
+
+[tags]
+email, imap, smtp, tls, ssl

@@ -1,0 +1,37 @@
+[commands]
+check_biztalk_cluster_host_instance=$USER1$/check_biztalk_cluster_host_instance $ARG1$
+check_biztalk_msdtc=$USER1$/check_biztalk_msdtc $ARG1$
+check_biztalk_orchestration=$USER1$/check_biztalk -U $USER13$ -P $USER14$ -H $HOSTADDRESS$ -o $ARG1$ -O $ARG2$
+check_biztalk_ports=$USER1$/check_biztalk -U $USER13$ -P $USER14$ -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
+check_biztalk_queues=$USER1$/check_biztalk -U $USER13$ -P $USER14$ -H $HOSTADDRESS$ -W $ARG1$ -C $ARG2$
+check_biztalk_sendports=$USER1$/check_biztalk -U $USER13$ -P $USER14$ -H $HOSTADDRESS$ -d $ARG1$ -D $ARG2$
+check_biztalk_specific_locations=$USER1$/check_biztalk -U $USER13$ -P $USER14$ -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -l $ARG3$
+check_biztalk_spool_size=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckCounter -a 'Counter:Spool Size=\BizTalk:Message Box:General Counters(biztalkmsgboxdb:sevmcoinsql)\Spool Size' ShowAll MaxWarn=$ARG1$ MaxCrit=$ARG2$
+
+[name]
+check_biztalk
+
+[info]
+The plugin is used to monitor the Microsoft Biztalk application. The following can be monitored:
+
+- Receive Locations status
+- Send Ports status
+- Messages in the Group Overview
+
+[why]
+To make sure the status of Recieve Locations and Send Ports are correct and to get notifications if there are any critical messages in the Group Overview.
+
+[how]
+The plugin uses the Biztalk Msg database for monitoring.
+
+[platforms]
+Microsoft Biztalk
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+microsoft biztalk, database

@@ -1,0 +1,23 @@
+[commands]
+check_dummy=$USER1$/check_dummyv2 $ARG1$ $ARG2$ $ARG3$
+
+[name]
+check_dummy
+
+[info]
+Returns what ever status, service output data  and service preformance data you specify.
+[why]
+This can be used if you want to add hosts in your configuration that you cannot monitor but really want to include in the network map anyway.
+[how]
+N/A
+[platforms]
+Not platform dependent
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+dummy

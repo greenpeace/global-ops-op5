@@ -1,0 +1,23 @@
+[name]
+check_apt
+
+[info]
+This plugin checks for software updates on systems that use package management systems based on the apt-get(8) command found in Debian GNU/Linux and Ubuntu.
+
+[why]
+Helps you keep your Debian GNU/Linux and Ubuntu systems up to date with the latest security packages.
+
+[how]
+By using the apt sources added on the system to see if there are any new updates to download.
+
+[platforms]
+Debian GNU/Linux and Ubuntu systems.
+
+[categories]
+Operating Systems
+
+[support]
+4
+
+[tags]
+debian, ubuntu, system packages, apt

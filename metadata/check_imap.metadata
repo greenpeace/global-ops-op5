@@ -1,0 +1,22 @@
+[commands]
+check_imap=$USER1$/check_imap -H $HOSTADDRESS$
+[name]
+check_imap
+
+[info]
+Checks connectivity to a IMAP server.
+[why]
+To see status of an IMAP mailserver
+[how]
+By connecting to the IMAP server and expecting a proper resopnse. You can send IMAP commands to the server and specify the expected responce. You can also set thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+[categories]
+Mail
+
+[support]
+4
+
+[tags]
+email, imap

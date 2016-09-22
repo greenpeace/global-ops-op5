@@ -1,0 +1,30 @@
+[commands]
+check_log_eventlog=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$_logmsg.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$_logmsg.log -s /var/www/html/logs/$HOSTADDRESS$_logmsg.log-seekfile -p $ARG1$
+check_log_snmptraps=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$__snmptraps.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$__snmptraps.log -s /var/www/html/logs/$HOSTADDRESS$__snmptraps.log-seekfile -p $ARG1$
+check_log_syslog=$USER1$/urlize https://`hostname -f`/logs/$HOSTADDRESS$_logmsg.log $USER1$/check_log2.pl -l /var/www/html/logs/$HOSTADDRESS$_logmsg.log -s /var/www/html/logs/$HOSTADDRESS$_logmsg.log-seekfile -p $ARG1$
+[name]
+urlize
+
+[info]
+This plugin creates an URL of a status message from an other plugin.
+
+[why]
+If you like to have a clickable URL in your status message in your status view in op5 Monitor you may use this plugin to do the job for you.
+
+[how]
+This plugin wraps the text output of another command (plugin) in HTML <A> tags, thus displaying the plugin output in as a clickable link in the Nagios status screen. The return status is the same as the invoked plugin.
+
+[platforms]
+Not platform depended
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+url status message
+check_log_eventlog=eventlogs, log files
+check_log_snmptraps=snmptraps, log files
+check_log_syslog=syslog, log files

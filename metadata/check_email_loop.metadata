@@ -1,0 +1,23 @@
+[name]
+check_email_loop
+
+[info]
+Real End-To-End check of an e-mail-system.
+
+[why]
+To verify end-to-end functionality of a complex e-mail-system.
+
+[how]
+By sending email via an SMTP and receiving the emails from a mailbox over pop3 or imap.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Mail
+
+[support]
+5
+
+[tags]
+email

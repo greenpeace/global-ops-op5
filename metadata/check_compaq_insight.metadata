@@ -1,0 +1,28 @@
+[commands]
+check_hp_insight=$USER1$/check_compaq_insight -H $HOSTADDRESS$ -C $ARG1$
+
+[name]
+check_compaq_insight
+
+[info]
+Check status of Compaq/HP Insight hardware
+
+[why]
+To check the status of RAID, fan and power supplies.
+
+[how]
+Connects via SNMP to check values returned by Compaq Insight Agents.
+
+[platforms]
+Compaq/HP Insight hardware (Proliant-series).
+
+Read more about monitoring HP/Compaq servers at https://kb.op5.com/x/3oEK.
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+compaq, hp, insight, hardware, powersupply, fan, raid, snmp

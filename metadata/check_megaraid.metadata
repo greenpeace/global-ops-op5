@@ -1,0 +1,25 @@
+[commands]
+check_megaraid=$USER2$/check_megaraid
+[name]
+check_megaraid
+
+[info]
+This plugin is locally checking status of an megaraid controller.
+
+[why]
+So you know that the local megaraid controler on your server is working as it should.
+
+[how]
+It uses the /proc/megaraid/ directory for finding out status about disks.
+
+[platforms]
+Unix / Linux using megaraid.
+
+[categories]
+Hardware
+
+[support]
+6
+
+[tags]
+megaraid, raid controller, hardware

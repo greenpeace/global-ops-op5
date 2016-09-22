@@ -1,0 +1,29 @@
+[commands]
+check_buildbot_jobs=$USER1$/check_buildbot.py -H $ARG1$ -m jobs
+check_buildbot_jobs_specific=$USER1$/check_buildbot.py -H $ARG1$ -m jobs -s $ARG2$
+check_buildbot_connected=$USER1$/check_buildbot.py -H $ARG1$ -m connection
+check_buildbot_connected_specific=$USER1$/check_buildbot.py -H $ARG1$ -m connection -s $ARG2$
+
+[name]
+check_buildbot
+
+[info]
+Get varius metrics from your buildbot environment
+
+[why]
+To be able to monitor the job queues, or if you lost connection to a build-slave.
+
+[how]
+Query the buildbot API for metrics.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+CI
+
+[support]
+4
+
+[tags]
+buildbot, ci, build environment

@@ -1,0 +1,32 @@
+[commands]
+check_mssql_db_online=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -o
+check_mssql_query_response=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -Q "$ARG5$" -S "$ARG6$"
+check_mssql_response_length=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -Q "$ARG5$" -w "$ARG6$" -c "$ARG7$"
+check_mssql_blocked_processes=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D master -q "select count(lastwaittype) from sysprocesses where blocked != 0" -s -W $ARG3$ -C $ARG4$ -l "Num of blocked processes"
+check_mssql_blocked_processes_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D master -q "select count(lastwaittype) from sysprocesses where blocked != 0" -s -W $ARG3$ -C $ARG4$ -l "Num of blocked processes"
+check_sybase_db_online=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -o
+check_sybase_query_response=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -Q "$ARG5$" -S "$ARG6$"
+check_sybase_response_length=$USER1$/check_mssql -H $HOSTADDRESS$ -p $ARG1$ -U "$ARG2$" -P "$ARG3$" -D "$ARG4$" -Q "$ARG5$" -w "$ARG6$" -c "$ARG7$"
+[name]
+check_mssql
+[info]
+Check Microsoft SQL Servers
+[why]
+To check status of MS SQL servers.
+
+[how]
+Connects to a MS SQL database and checks if it is accepting connections. Lets you specify database username, password. It can also accept a query and thresholds for the number of rows that the query may return.
+
+Read more about monitoring MS SQL Servers at https://kb.op5.com/x/SIIK.
+
+[platforms]
+Windows
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+microsoft windows, sql server, database

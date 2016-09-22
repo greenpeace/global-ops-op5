@@ -1,0 +1,20 @@
+[name]
+check_time
+
+[info]
+Check time on a host running timeserver.
+[why]
+To check that the time is correct on remote systems.
+[how]
+Connect to a host that is running timeserver (port 37). It lets you set accepted variance between the remote host and the local clock.
+[platforms]
+Not platform dependent.
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+time, ntp, timeserver

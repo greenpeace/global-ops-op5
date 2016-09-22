@@ -1,0 +1,25 @@
+[name]
+check_snmp_boostedge
+
+[info]
+The plugin checks BoostEdge web accelerator.
+
+[why]
+To get control over the overall states of your BoostEdge web accelerator.
+
+[how]
+By SNMP
+
+[platforms]
+BoostEdge web accelerators.
+
+[categories]
+SNMP, Misc
+
+[boostedge, web accelerator, snmp, network
+
+[support]
+5
+
+[tags]
+web, accelerator, network, boostedge, snmp

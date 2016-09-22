@@ -1,0 +1,24 @@
+[name]
+check_mysql_query
+
+[info]
+This plugin is deprecated in op5 Monitor >= 7.0. It will be removed in op5 Monitor 8.0. Please use check_mysql_health instead.
+This program checks a query result against threshold levels.
+
+[why]
+So you may send custom queries to a MySQL database.
+
+[how]
+You send a SQL query and make sure it returns a numeric value.
+
+[platforms]
+Anything that may run a mysql server.
+
+[categories]
+Databases
+
+[support]
+8
+
+[tags]
+mysql, database, sql query

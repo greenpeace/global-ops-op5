@@ -1,0 +1,32 @@
+[commands]
+check_jmx_current_threadcount=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O java.lang:type=Threading -A ThreadCount  -K .. -w $ARG2$ -c $ARG3$
+check_jmx_garbage_collection_timing=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O .java.lang:type=GarbageCollector,name=PS MarkSweep. -A LastGcInfo -K duration -w $ARG2$  -c $ARG3$ -u ms
+check_jmx_heapmem_used=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O java.lang:type=Memory -A HeapMemoryUsage -K used -w $ARG2$ -c $ARG3$ -u B
+check_jmx_long_running_threads=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O jboss.threads:name=LongRunningTasksThreadPool,type=queuelessThreadPool -A CurrentThreadCount -K .. -w $ARG2$ -c $ARG3$
+check_jmx_nonheap_mem_used=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O java.lang:type=Memory -A NonHeapMemoryUsage -K used -w $ARG2$  -c $ARG3$ -u B
+check_jmx_availible_connections_in_pool=$USER1$/check_jmx -U service:jmx:rmi:///jndi/rmi://.$HOSTADDRESS$.:'$ARG1$./jmxrmi -O jboss.jca:name=JmsXA,service=ManagedConnectionPool -A AvailableConnectionCount  -K .. -w $ARG2$ -c $ARG3$
+
+
+[name]
+check_jmx
+
+[info]
+The JMX Plugin is a Nagios plugin for monitoring devices, applications,
+and service-driven networks using Java Management Extensions (JMX)
+
+Java Management Extensions (JMX) is a Java technology that supplies tools for managing and monitoring applications, system objects, devices (e. g. printers) and service oriented networks. Those resources are represented by objects called MBeans (for Managed Bean).*
+
+JMX exposes a set of .Managed bean. (MBean) wich represents a resource running in the Java Virtual Machine.
+
+The JMX implementation of a java application server typically exposes resource usage statistics (memory, threads used etc) and lots of other statistics/metrics. Apart from generic information the application server vendor also provide MBeans specific for the application server in question.
+
+The check_jmx plugin enables you to monitor the values of any MBean attribute made available through JMX.
+
+[categories]
+Java
+
+[support]
+5
+
+[tags]
+jmx, java, jboss, web application

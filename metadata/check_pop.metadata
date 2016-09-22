@@ -1,0 +1,22 @@
+[commands]
+check_pop=$USER1$/check_pop -H $HOSTADDRESS$
+[name]
+check_pop
+
+[info]
+checks status on a POP3 server.
+[why]
+To see the status of your pop3 servers.
+[how]
+Connects to a POP3 server checks status.
+[platforms]
+Not platform dependent.
+
+[categories]
+Mail
+
+[support]
+4
+
+[tags]
+email, pop, tcp

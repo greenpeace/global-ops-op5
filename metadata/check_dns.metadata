@@ -1,0 +1,26 @@
+[commands]
+check_dns=$USER1$/check_dns -H $ARG1$ -s $HOSTADDRESS$ -a $ARG2$
+
+[name]
+check_dns
+
+[info]
+Checks DNS Servers.
+
+[why]
+To see that your DNS is resolving correct..
+
+[how]
+It use the nslookup command to obtain the IP address for the given host/domain query.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+DNS
+
+[support]
+4
+
+[tags]
+dns, domain names, resolve

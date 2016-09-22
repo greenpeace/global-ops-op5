@@ -1,0 +1,20 @@
+[name]
+check_esx
+
+[info]
+Check status of Vmware ESX Server.
+[why]
+The plugin checks status (CPU, memory) of virtual machines running inside Vmware ESX Server.
+[how]
+The plugin queries status of ESX Server via SNMP.
+[platforms]
+Vmware ESX Server
+
+[categories]
+Operating Systems
+
+[support]
+6
+
+[tags]
+vmware, esx, snmp

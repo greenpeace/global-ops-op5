@@ -1,0 +1,20 @@
+[name]
+check_simap
+
+[info]
+This plugin tests SIMAP connections with the specified host (or unix socket).
+[why]
+To see status of an IMAP mailserver.
+[how]
+Connects to a Secure IMAP server and checks status.
+[platforms]
+Not platform dependent.
+
+[categories]
+Mail
+
+[support]
+5
+
+[tags]
+email, imap, secure imap, tcp

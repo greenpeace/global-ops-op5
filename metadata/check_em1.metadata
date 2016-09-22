@@ -1,0 +1,28 @@
+[commands]
+check_em1_humidity=$USER1$/check_em1 -H $HOSTADDRESS$ -u $ARG1$ -q h -w $ARG2$ -c $ARG3$
+check_em1_temperature=$USER1$/check_em1 -H $HOSTADDRESS$ -u $ARG1$ -q t -w $ARG2$ -c $ARG3$
+check_em1_wetness=$USER1$/check_em1 -H $HOSTADDRESS$ -u $ARG1$ -q w -w $ARG2$ -c $ARG3$
+
+[name]
+check_em1
+
+[info]
+Check temperature, wetness and humidity of a probe connected to a Sensatronics EM1.
+
+[why]
+To be notified when temperature, wetness or humidity in e.g. server rooms rise above defined thresholds.
+
+[how]
+The plugin queries status of Sensatronics EM1 via HTTP protocol.
+
+[platforms]
+Sensatronics EM1
+
+[category]
+Environmental
+
+[support]
+5
+
+[tags]
+sensatronic, environment, humidity, wetness, temperature

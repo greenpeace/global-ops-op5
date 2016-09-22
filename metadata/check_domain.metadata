@@ -1,0 +1,43 @@
+[commands]
+check_domain_expiration=$USER1$/check_domain -d $ARG1$ -w $ARG2$ -c $ARG3$
+
+[name]
+check_domain
+
+[info]
+Checks the expiration date of an domain name.
+The following TLDs are supported:
+.com
+.edu
+.net
+.org
+.in
+.co.uk
+.biz
+.info
+.ru
+.dk
+.se
+.fi
+.ie
+.us
+.cn
+.nu
+
+[why]
+To make sure you do not miss a renewal of your domain names(s).
+
+[how]
+The plugin is using the whois command on a linux system.
+
+[platforms]
+Linux
+
+[categories]
+DNS
+
+[support]
+5
+
+[tags]
+dns, domain names, whois

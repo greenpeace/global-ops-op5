@@ -1,0 +1,23 @@
+[name]
+check_ircd
+
+[info]
+Checking to see if there is any ircd running and see how many user it has.
+
+[why]
+To see status of a IRC Server.
+
+[how]
+By connecting to the IRC server and expecting a proper responce. You can also set tresholds on responstime.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+irc server, chat

@@ -1,0 +1,53 @@
+[commands]
+check_merlin_mysql=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c mysql
+check_merlin_mysql_virt_mem_usage=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c mysql_vsz
+check_merlin_process=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c merlin_procs
+check_merlin_process_cpu_usage=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c merlin_cpu
+check_merlin_process_virt_mem_usage=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c merlin_vsz
+check_merlin_prog_status=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c mer_prog_status
+check_monitor_core_files=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c cores
+check_monitor_distribution=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_distribution
+check_monitor_failed_sms=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_failed_sms
+check_monitor_hardware_ipmi=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_ipmi
+check_monitor_host_check_exec_time=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c host_exectime
+check_monitor_host_check_orphans=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c host_orphans
+check_monitor_host_latency=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c host_latency
+check_monitor_op5backup=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_op5backup
+check_monitor_pnp_graph_procs=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_pnp_graph_procs
+check_monitor_processes=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c mon_procs
+check_monitor_processes_cpu_usage=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c mon_cpu
+check_monitor_rrdcached_proc=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_rrdcached_proc
+check_monitor_service_check_exec_time=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c service_exectime
+check_monitor_service_check_orphans=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c service_orphans
+check_monitor_service_latency=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c service_latency
+check_monitor_smsd_procs=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_smsd_procs
+check_monitor_smsd_zombie_procs=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_smsd_zombie_procs
+check_monitor_spooled_checks=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c spooled_checks
+check_monitor_spooled_perfdata=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c spooled_perfdata
+check_monitor_tmp_disk=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_tmp_disk
+check_monitor_yum_update=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_yum_update
+
+
+[name]
+check_op5monitor
+
+[info]
+This is is a collection of commands to be used to monitor your op5 Monitor server in it self.
+
+[why]
+Use the commands inclued here to get a good picture of who your op5 Monitor server is doing.
+
+[how]
+All commands are using NRPE. The reason for that is because if you are running a peered solution you need to check the correct op5 Monitor server no matter what peer is executing the check.
+
+[platforms]
+A server running op5 Monitor
+
+[categories]
+op5 Monitor servers
+
+[support]
+4
+
+[tags]
+op5 monitor

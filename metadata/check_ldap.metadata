@@ -1,0 +1,21 @@
+[commands]
+check_ldap=$USER1$/check_ldap -H $HOSTADDRESS$ -b $ARG1$ -w $ARG2$ -c $ARG3$
+[name]
+check_ldap
+
+[info]
+Tests connections to an LDAP server.
+[why]
+To see that the LDAP server is working. This can be used to check for example Windows Active Directory servers.
+[how]
+By connecting to the LDAP server. You can specify protocol version, password and diffrent search criterias. You can also set thresholds on responstime.
+[platforms]
+Not platform dependent.
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+ldap

@@ -1,0 +1,29 @@
+[commands]
+check_yum_update=$USER1$/check_yum_update
+
+[name]
+check_yum_update
+
+[info]
+Checks for availabla updates using the command 'yum check-updates'.
+
+[why]
+To make sure you do not miss any updates on your RedHat/CentOS linux system that uses yum as a package manager.
+
+[how]
+The plugin uses the yum command to get the number of new package available for installation.
+
+[keywords]
+redhat,linux
+
+[platforms]
+RedHat, CentOS
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+yum, os updates, redhat, centos

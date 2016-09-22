@@ -1,0 +1,25 @@
+[commands]
+check_local_ipmi=$USER1$/check_ipmi /tmp/.ipmitool-sensor-cache
+[name]
+check_ipmi
+
+[info]
+Nagios plugin for locally checking hardware status (fans, voltage) via ipmi.
+
+[why]
+To get control over the local hardware on your server.
+
+[how]
+It utilizes ipmitool to get results from kernel.
+
+[platforms]
+Unix server with ipmitools installed.
+
+[categories]
+Hardware
+
+[support]
+4
+
+[tags]
+ipmi, ipmitool, unix, linux, local hardware

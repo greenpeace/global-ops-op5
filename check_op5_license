@@ -1,0 +1,294 @@
+#!/usr/bin/env php
+<?php
+
+error_reporting(E_ALL|E_STRICT);
+
+// Load kohana to get access to both lib files and events (state)
+if(!defined('SKIP_KOHANA')) {
+	define('SKIP_KOHANA', true);
+}
+require_once '/opt/monitor/op5/ninja/index.php';
+
+require_once 'op5/auth/Auth.php';
+
+class Check_Op5license_Exception extends Exception {}
+
+class Check_Op5license {
+	const CRITICAL = 2;
+	const OK = 0;
+	const VERSION = "v2016.c.1";
+	const WARNING = 1;
+	const UNKNOWN = 3;
+	const INT_32MAX = 2147483647; // Signed int 32 to represent unlimited
+	const UNLIMITED = self::INT_32MAX;
+	private $c = false; /**< @var string value of -c|--critical */
+	private $help = <<<HELP
+NAME
+    check_op5_license
+
+SYNOPSIS
+    check_op5_license -w -c [--type checktype] [--product productname]
+    check_op5_license --help
+
+DESCRIPTION
+    Check if what's left of the license is less than input thresholds.
+
+COMMANDS
+    Warning and Critical thresholds are given in either hosts left, percentage
+    of hosts left or days left of license; see the type parameter.
+
+    -w|--warning
+        Warning threshold
+
+    -c|--critical
+        Critical threshold
+
+    -T|--type checktype
+	One of the following:
+
+        p
+	    (DEFAULT) Check against percentage left of host usage. For example,
+	    -T p -w 10 -c 5 would warn if the amount of hosts left on license
+            is 7%.
+
+        h
+	    Number of hosts left to use. For example, -T h -w 50 -c 30 would
+            be critical if the license allows 30 more hosts to be configured.
+
+	d
+	    Days left before license needs renewal. For example,
+	    -T d -w 60 -c 30 would warn 60 days in advance, and turns critical
+            when there's only 30 days left.
+
+    -P|--product productname
+        One of the following:
+
+        monitor
+            (DEFAULT)
+
+        logserver
+
+    -V|--version
+        Prints the current version
+
+    --help
+        Show this help message
+HELP;
+	private $mayi;
+	private $w = false; /**< @var string value of -w|--warning */
+	private $P = 'monitor'; /**< @var string value of -P|--product */
+	private $T = 'p'; /**< @var string value of -T|--type */
+
+	/**
+	 * @param $mayi op5mayi
+	 */
+	function __construct(op5mayi $mayi) {
+		$this->mayi = $mayi;
+	}
+
+	/**
+	 * Adds SEVERITY: prefix and |perf_data suffix
+	 *
+	 * @param $result int
+	 * @param $value int
+	 * @return array [int, string]
+	 */
+	private function format($result, $value) {
+		$message = "";
+		switch($result) {
+			case self::OK:
+				$message = 'OK: ';
+				break;
+			case self::WARNING:
+				$message = 'WARNING: ';
+				break;
+			case self::CRITICAL:
+				$message = 'CRITICAL: ';
+				break;
+		}
+		$uom = '';
+		switch($this->T) {
+			case 'p':
+				$label = '% hosts left';
+				$uom = '%';
+				$message .= $value;
+				break;
+			case 'h':
+				$label = ' hosts left';
+				$message .= $value;
+				break;
+			case 'd':
+				$label = ' left';
+				$datetime_now = new DateTime("now");
+				$datetime_end = new DateTime("+" . $value . " days");
+				$interval = $datetime_now->diff($datetime_end);
+				$message = $interval->format("%y year(s) %m month(s) %d day(s)");
+				break;
+		}
+		$perfdata = sprintf("|'%s'=%s%s;%s;%s", trim($label), $value, $uom, $this->w, $this->c);
+		$message .= "$label";
+		/**
+		 * If the number of hosts or days in the license are
+		 * unlimited we should return a neater message.
+		 */
+		$message .= $perfdata;
+		if($value == self::UNLIMITED && $this->T == 'd') {
+			$message = 'OK: By agreement';
+		}
+		elseif($value == self::UNLIMITED && $this->T == 'h') {
+			$message = 'OK: Unlimited number of hosts left';
+		}
+		return array($result, $message);
+	}
+
+	/**
+	 * @param $opts array from getopt with relevant values
+	 */
+	function check($opts) {
+		// help
+		if(isset($opts['h']) || isset($opts['help'])) {
+			return array(self::OK, $this->help);
+		}
+
+		// version
+		if(isset($opts['V']) || isset($opts['version'])) {
+			return array(self::OK, self::VERSION);
+		}
+
+		// thresholds
+		foreach(array('w', 'warning', 'c', 'critical') as $key) {
+			if(!isset($opts[$key])) {
+				continue;
+			}
+			$value = $opts[$key];
+			if(!is_numeric($value)) {
+				throw new Check_Op5license_Exception("Bad value ($value) for $key argument, number needed");
+			}
+			// value for the same unit will override the earlier
+			$this->$key[0] = $value; // 'w' or 'c'
+		}
+		if($this->w === false) {
+			throw new Check_Op5license_Exception("Missing warning threshold");
+		}
+		if($this->c === false) {
+			throw new Check_Op5license_Exception("Missing critical threshold");
+		}
+
+		// type
+		foreach(array('T', 'type') as $key) {
+			if(isset($opts[$key])) {
+				$value = $opts[$key];
+				if(!in_array($value, array('d', 'p', 'h'), true)) {
+					throw new Check_Op5license_Exception("Invalid type, see --help for explanations to the $key parameter");
+				}
+				$this->T = $value;
+			}
+		}
+
+		// product
+		foreach(array('P', 'product') as $key) {
+			if(isset($opts[$key])) {
+				$value = $opts[$key];
+				if(!in_array($value, array('monitor', 'logserver'), true)) {
+					throw new Check_Op5license_Exception("Invalid product name, see --help for explanations to the $key parameter");
+				}
+				$this->P = $value;
+			}
+		}
+
+		// $metrics are [key => [value, min, max]] if an old license is
+		// used, none (!) if a trial license is in use
+		$license_valid = $this->mayi->run('monitor.monitoring.hosts:read', array(), $messages, $metrics);
+
+		switch($this->T) {
+			case 'd':
+				// days left
+				if(!isset($metrics['license_time'])) {
+					throw new Check_Op5license_Exception("Your license's expiration date could not be determined by this check.");
+				}
+				$expiration_seconds = $metrics['license_time']->get_max();
+				$seconds_in_a_day = 60*60*24;
+				$days_left = floor(($expiration_seconds - time()) / $seconds_in_a_day);
+				if($expiration_seconds == self::UNLIMITED) {
+					$days_left = self::UNLIMITED;
+				}
+				if($days_left < 0) {
+					$days_left = 0;
+				}
+				if($this->c >= $days_left) {
+					return $this->format(self::CRITICAL, $days_left);
+				}
+				if($this->w >= $days_left) {
+					return $this->format(self::WARNING, $days_left);
+				}
+				return $this->format(self::OK, $days_left);
+			case 'h':
+			case 'p':
+				// percentage of hosts used
+				// TODO never return array() without performance data attached.. why was this ever OK?
+				if(!isset($metrics['hosts'])) {
+					throw new Check_Op5license_Exception("Your license's host limit could not be determined by this check.");
+				}
+
+				// let's hope that we stay consistent with the
+				// way the number of hosts used is calculated,
+				// vs the monitoring_hooks mayi actor
+				$hosts_in_license = $metrics['hosts']->get_max();
+				$hosts_used = $metrics['hosts']->get_value();
+				$hosts_left = $hosts_in_license - $hosts_used;
+				if($hosts_in_license == self::UNLIMITED) {
+					$hosts_left = self::UNLIMITED;
+				}
+				if($this->T == 'p') {
+					if($hosts_in_license == 0) {
+						$hosts_left = 0;
+					} else {
+						$hosts_left = floor(($hosts_in_license - $hosts_used) / $hosts_in_license * 100);
+					}
+				}
+				if($hosts_left < 0) {
+					$hosts_left = 0;
+				}
+				if($this->c >= $hosts_left) {
+					return $this->format(self::CRITICAL, $hosts_left);
+				}
+				if($this->w >= $hosts_left) {
+					return $this->format(self::WARNING, $hosts_left);
+				}
+				return $this->format(self::OK, $hosts_left);
+		}
+	}
+}
+
+// Similar to python's if __name__ == '__main__', i.e.
+// only run this code if we're executing this file, not
+// if we're including it
+// this method works with symlinks as well, contrary
+// to argv or __FILE__ based solutions
+if(!debug_backtrace()) {
+	// We want to check the license but load all of mayi too. So, if we
+	// auth as a super user, all that is left to deny us is the license.
+	$auth = op5auth::instance(array('session_key' => false));
+	$auth->force_user(new User_AlwaysAuth_Model());
+
+	try {
+		$license_check = new Check_Op5license(op5mayi::instance());
+		$result = $license_check->check(getopt('c:hP:T:Vw:', array(
+			'critical:',
+			'help',
+			'product:',
+			'type:',
+			'version',
+			'warning:',
+		)));
+	} catch(Exception $e) {
+		$message = $e->getMessage();
+		if(!$message) {
+			$message = "Unknown error";
+		}
+		echo "UNKNOWN: $message\n";
+		exit(3);
+	}
+	echo $result[1]."\n";
+	exit($result[0]);
+}

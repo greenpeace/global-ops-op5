@@ -1,0 +1,20 @@
+[name]
+negate
+
+[info]
+Negates result of a plugin.
+[why]
+For example, if you whant to check that it is not possible to connect to a specific TCP port, you can use check_tcp which will return critical as long as the port is closed. Negate will convert that response to OK.
+[how]
+This plugin should be used together with other plugins and negates the check result of the plugin that is run. Critical equals to OK and vice versa.
+[platforms]
+Not platform dependent.
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+negate result

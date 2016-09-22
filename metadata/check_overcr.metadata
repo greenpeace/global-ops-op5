@@ -1,0 +1,20 @@
+[name]
+check_overcr
+
+[info]
+Gathers Over-CR collector daemon data.
+[why]
+To remotly gather system information.
+[how]
+Connects to Over-CR daemon running on remote host.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+over-cr collector, unix, linux, network

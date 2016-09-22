@@ -1,0 +1,23 @@
+[name]
+check_pattern
+
+[info]
+This plugin check a logfile on the localhost for a given pattern.
+
+[why]
+To search for certain rows or patterns in your logfiles.
+
+[how]
+By searching for a beginning pattern and an end pattern and by default only look at the last found matching entry.
+
+[platforms]
+Unix/Linux
+
+[categories]
+Logs
+
+[support]
+4
+
+[tags]
+log file, unix, linux, pattern, logs

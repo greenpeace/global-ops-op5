@@ -1,0 +1,26 @@
+[commands]
+check_smsd=$USER1$/check_smsd -f /etc/smsd.conf -w $ARG1$ -c $ARG2$
+
+[name]
+check_smsd
+
+[info]
+This plugin is used to monitor the number of failed sms messages on a op5 Monitor server.
+
+[why]
+To give you notifications when there are too many failed sms on your server.
+
+[how]
+By checking the number of files in the error directory in your smsd spool directory.
+
+[platforms]
+op5 Monitor or any other host running smsd
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+sms, gsm, sms spool queue

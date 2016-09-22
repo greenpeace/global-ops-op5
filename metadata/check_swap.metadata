@@ -1,0 +1,26 @@
+[commands]
+check_swap=$USER1$/check_swap -w $ARG1$ -c $ARG2$ -a
+
+[name]
+check_swap
+
+[info]
+Check swap usage.
+
+[why]
+To make sure you will be notified if the server is using to much of its swap space.
+
+[how]
+The swap is checked on the local machine. How it is done depends on what operating system the plugin is executed on.
+
+[platforms]
+Unix / Linux
+
+[categories]
+File System
+
+[support]
+4
+
+[tags]
+operating system, os, unix, linux, swap, memory

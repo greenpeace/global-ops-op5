@@ -1,0 +1,20 @@
+[name]
+check_temptraxf
+
+[info]
+Check temperatures of a probe connected to a TempTrax Model F.
+[why]
+To be notified when temperatures in e.g. server rooms rise above defined thresholds.
+[how]
+The plugin queries status of Temptrax via HTTP protocol.
+[platforms]
+TempTrax Model F.
+
+[categories]
+Environmental
+
+[support]
+5
+
+[tags]
+environment, temperature, temptrax model f

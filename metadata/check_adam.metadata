@@ -1,0 +1,26 @@
+[commands]
+check_adam=$USER1$/check_adam -H $HOSTADDRESS$ --coil $ARG1$ --check-di --expect $ARG2$
+
+[name]
+check_adam
+
+[info]
+Used to check the status of digital input coils the Adam environment module.
+
+[why]
+To make it easy to monitor enviruments etc with your adam module
+
+[how]
+Everything is checked via snmp
+
+[platforms]
+Adam module
+
+[categories]
+Environmental
+
+[support]
+6
+
+[tags]
+adam, environment

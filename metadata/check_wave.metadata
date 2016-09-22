@@ -1,0 +1,23 @@
+[name]
+check_wave
+
+[info]
+To test signal strength on Speedlan wireless equipment.
+
+[why]
+To make sure you will be notified if the signal strength is not good enough.
+
+[how]
+The data is collected with SNMP.
+
+[platforms]
+Speedlan wireless equipment.
+
+[categories]
+Networking
+
+[support]
+6
+
+[tags]
+speedlan, wlan, snmp

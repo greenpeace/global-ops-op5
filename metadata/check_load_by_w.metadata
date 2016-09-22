@@ -1,0 +1,23 @@
+[name]
+check_load_by_w
+
+[info]
+Checks system load on a unix server.
+
+[why]
+To make sure you do not end up with a server having to high load.
+
+[how]
+Checking the load on a Linux or a Unix server by using the "w" command.
+
+[platforms]
+Unix/Linux
+
+[categories]
+CPU
+
+[support]
+6
+
+[tags]
+unix, linux, cpu, load

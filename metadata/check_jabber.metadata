@@ -1,0 +1,21 @@
+[name]
+check_jabber
+
+[info]
+Tests JABBER connections to a specified host.
+[why]
+To se status of a message server running JABBER.
+[how]
+By connecting to the JABBER server. It lets you send a message and expect a message back. You can also specify to use ssl or not and set threshold on responstime.
+[platforms]
+Not platform dependent.
+
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+jabber, im, chat

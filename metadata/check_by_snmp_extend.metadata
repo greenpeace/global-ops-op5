@@ -1,0 +1,30 @@
+[commands]
+check_by_snmp_extend_v2=$USER1$/check_by_snmp_extend -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -i '$ARG2$'
+check_by_snmp_extend_v3=$USER1$/check_by_snmp_extend -H $HOSTADDRESS$ $ARG1$ -P 3 -i '$ARG2$'
+check_by_snmp_extend_custom=$USER1$/check_by_snmp_extend $ARG1$
+
+[name]
+check_by_snmp_extend
+
+[info]
+This plugin runs other plugins via SNMP.
+
+[why]
+If you don't wish to use other types of agents, this plugin lets you
+run plugins on remote systems with tools that are usually readily
+packaged by vendors.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Unix/Linux
+
+[categories]
+SNMP
+
+[support]
+5
+
+[tags]
+unix, linux, snmp, net-snmp, process, processes

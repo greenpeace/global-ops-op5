@@ -1,0 +1,16 @@
+[commands]
+check_op5_license_monitor_percentage_left=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_op5_license_monitor_percentage_left
+check_op5_license_monitor_hosts_left=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_op5_license_monitor_hosts_left
+check_op5_license_monitor_days_left=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_op5_license_monitor_days_left
+
+[name]
+check_op5_license
+
+[info]
+Allows you to know when your license expires.
+
+[support]
+4
+
+[tags]
+op5

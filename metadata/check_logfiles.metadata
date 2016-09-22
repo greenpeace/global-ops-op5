@@ -1,0 +1,26 @@
+[commands]
+check_logfiles=$USER1$/check_logfiles -f $USER1$/check_logfiles_config/$ARG1$
+
+[name]
+check_logfiles
+
+[info]
+check_logfiles scans log files for specific patterns
+
+[why]
+To check and get notified if you find errors or other messages in your logfiles that
+you are interested in.
+
+[how]
+
+[platforms]
+Linux
+
+[categories]
+Logs
+
+[support]
+6
+
+[tags]
+logs

@@ -1,0 +1,441 @@
+#!/bin/sh
+#
+# License: GPL
+# Copyright (c) 2007 op5 AB
+# Author: Carl Ekman <op5-users@lists.op5.com>
+#
+# For direct contact with any of the op5 developers send a mail to
+# op5-users@lists.op5.com
+# Discussions are directed to the mailing list op5-users@op5.com,
+# see http://lists.op5.com/mailman/listinfo/op5-users
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+rhost=127.0.0.1
+user=op5check
+test=unspecified
+input_1=""
+RSH=openssh
+keyfile=""
+warn_w=-99999999
+warn_c=-99999999
+warn_W=99999999
+warn_C=99999999
+VERBOSE=0
+#
+while getopts hH:U:t:i:r:I:c:C:w:W:v argument
+do
+	case $argument in
+	h)	help="true";;
+	H)	rhost=$OPTARG;;
+	U)	user=$OPTARG;;
+	t)	test=$OPTARG;;
+	i)	input_1=$OPTARG;;
+	r)	RSH=$OPTARG;;
+	I)	keyfile=" -i $OPTARG ";;
+	w)	warn_w=$OPTARG;;
+	W)	warn_W=$OPTARG;;
+	c)	warn_c=$OPTARG;;
+	C)	warn_C=$OPTARG;;
+	v)	VERBOSE=1;;
+	esac
+done
+
+if { test ! -z "$help" || test ${#} -eq 0 ; }
+then
+	cat <<- EOF
+	check_unix is an op5 monitor plugin that checks a remote unix host
+	via SSH or other remote shell.
+
+	It performs various tests and aims to conform to the
+	Single Unix Specification.
+
+	NOTES
+	Note that BSD disregards standards for ps behaviour, and thus checks
+	on *BSD sometimes return funny values.
+
+	If running the test "mountpoint" on HP-UX mountpoints with very long
+	device names will be omitted.
+
+	If you encounter problems running this plugin on any unix, please
+	report the problem to support@op5.se and include the output from the
+	plugin and the result of running uname -a on the monitored host.
+
+	USAGE
+	-H		Host name or IP address
+	-U		Username on remote host (default: op5check)
+				Username is ignored if -r local
+	-h		Display this help text
+	-t		Choose which test to perform:
+				countproc
+	                            Count number of processes where the command
+	                            line matches the regexp given with -i
+				countbasename
+				    Count number of processes where the
+				    process binary name matches the regexp
+				    given with -i. For instance ^sshd$
+				totalproc
+				zombiecount
+				mountpoints (for information)
+				diskpercent
+				    percent used of partition, requires
+				    -i /path/to/mountpoint/
+				diskkbyte
+				    KBytes free on partition, requires
+			            -i /path/to/mountpoint/
+				uname (for information)
+				cpu (sum of pcpu from ps)
+				memusage (sum of vsz from ps)
+				dproc (Number or processes in state D)
+				rproc (Number of processes in state R)
+				drproc (Number or processes in state R or D)
+	-i <string>	Provide input value for the test
+	-r <string>	Specify openssh,rsh,lsh or local for the way to connect
+			to the remote host (default: openssh)
+	-I		SSH key to authenticate with (default: see ssh manpage)
+	-w		Provide low warning limit (default: -99999999)
+	-W		Provide upper warning limit (default: 99999999)
+	-c		Provide low critical limit (default: -99999999)
+	-C		Provide upper critical limit (default: 99999999)
+	-v		Verbose output
+
+	EXAMPLE
+	./check_unix -H 127.0.0.1 -U root -I .ssh/id_rsa -t countbasename -i ^syslog
+	./check_unix -r local -t diskpercent -i /
+	./check_unix -r local -t cpu
+	./check_unix -r local -t memusage
+
+	SETUP
+	Generate a RSA key as the user you wish to run the checks
+	as on the monitor server, usually by running ssh-keygen after
+	an su - monitor
+
+	Create the user op5check on the host that shall be monitored
+	and copy the public key (.ssh/id_rsa.pub) to
+	~op5check/.ssh/authorized_keys on the remote host. The actual
+	location and format for this file depends on which sshd that
+	is running on the monitored host.
+
+	Then ssh manually with ssh -l op5check remotehost as the monitor
+	user on the monitor machine, to save the remote host key and try
+	out your SSH configuration.
+
+	You can try out the commands directly from the command line before
+	configuring monitor, to make sure that everything works properly.
+	If you run into problems, specify the -v switch to see exactly what
+	commands check_unix use to gather data.
+
+	You might want to set up a restricted shell such as rbash for
+	the op5check user to improve security.
+
+	KEEP IN MIND
+	Different unices are very different under the hood, and it is not
+	certain that the tests will produce the expected result on your
+	UNIX flavour. For instance - checking memory usage is not interesting
+	on Linux because Linux uses up all free memory for disk cache quite
+	quickly - memory usage is therefore near 100% at all times.
+
+	On BSD uninterruptible sleep is not what you expect, so drproc might
+	not give a proper representation of active processes on BSD.
+
+	****************
+	Do check that your tests behave as you expect them to before you
+	rely on them.
+	****************
+
+	HEEY, I CAN'T SEE ALL THE TEXT
+	${0} -h | more
+
+	VERSION
+	check_unix v1.0 - August 2007 - Carl Ekman, www.op5.com
+	EOF
+	exit 99
+fi
+#
+#
+f_execute() {
+case ${RSH} in
+# OpenSSH is a very common SECSH implementation
+	openssh)
+		SSH=`which ssh`
+		if { test -z "${SSH}" ;}
+		then
+			echo Could not find ssh in the PATH. Exiting...
+			exit 99
+		fi
+		unset DISPLAY
+		if { test ${VERBOSE} -eq 1 ;}
+		then
+			echo ${SSH} -l \"${user}\" ${keyfile} -e none -o \"PasswordAuthentication no\" \"${rhost}\" ${*} 1>&2
+		fi
+		${SSH} -l "${user}" ${keyfile} -e none -o "PasswordAuthentication no" "${rhost}" ${*}
+		if { test $? -eq 255 ;}
+		then
+			echo INTERNAL: Failed to connect to the remote host 1>&2
+			exit 255
+		fi
+	;;
+# RSH
+	rsh)
+		RSH=`which rsh`
+		if { test -z "${RSH}" ;}
+		then
+			echo Could not find rsh in the PATH. Exiting...
+			exit 99
+		fi
+		if { test ${VERBOSE} -eq 1 ;}
+		then
+			echo ${RSH} -l \"${user}\" \"${rhost}\" ${*} 1>&2
+		fi
+		${RSH} -l "${user}" "${rhost}" ${*}
+	;;
+# lsh is a GPL implementation of SECSH
+	lsh)
+		LSH=`which lsh`
+		if { test -z "${LSH}" ;}
+		then
+			echo Could not find lsh in the PATH. Exiting...
+			exit 99
+		fi
+		if { test ${VERBOSE} -eq 1 ;}
+		then
+			echo ${LSH} -e none -l \"${user}\" \"${rhost}\" ${*} 1>&2
+		fi
+		${LSH} -e none -l "${user}" "${rhost}" ${*}
+	;;
+# local is meant for when being run from NRPE
+	local)
+		if { test ${VERBOSE} -eq 1 ;}
+		then
+			echo ${*} 1>&2
+		fi
+		${*}
+	;;
+# If there are no previous matches then the syntax is wrong
+	*)
+		echo "You have specified an invalid connect method."
+		echo "Valid values are openssh, rsh, lsh and local."
+		exit 99
+	;;
+esac
+
+}
+
+f_ps() {
+	# Check if ps behaves correctly or as on a BSD
+	INITPID=`f_execute ps -e -o pid|sed 's/ //g' |egrep '^1$'`
+	if { test "${INITPID}" = "1" ;}
+	then
+		f_execute ps -e ${*}
+	else
+		ARGS=`echo ${*} | sed 's/-o s/-o state/'`
+		f_execute ps ax ${ARGS}
+	fi
+}
+
+f_df() {
+	# Check if df behaves correctly or as on Solaris 8
+	POPTION=`f_execute df -k -P 2>&1|grep -i mounted|wc -l|sed 's/ //g'`
+	if { test "${POPTION}" = "1" ;}
+	then
+		f_execute df -k -P ${*}
+	else
+		f_execute df -k ${*}
+	fi
+}
+
+f_check() {
+	if { test $1 -le $warn_c ; }
+	then
+		echo CRITICAL: "${2}"
+		exit 2
+	fi
+	if { test $1 -ge $warn_C ; }
+	then
+		echo CRITICAL: "${2}"
+		exit 2
+	fi
+	if { test $1 -le $warn_w ; }
+	then
+		echo WARNING: "${2}"
+		exit 1
+	fi
+	if { test $1 -ge $warn_W ; }
+	then
+		echo WARNING: "${2}"
+		exit 1
+	fi
+	echo OK: "${2}"
+	exit 0
+}
+
+f_countproc() {
+	if { test -z "${1}" ; }
+	then
+		echo countproc requires an input value
+		exit 99
+	fi
+	RESULT=`f_ps -o args | egrep "${1}" | egrep -v 'grep|check_unix'| wc -l | sed 's/ //g'`
+	f_check $RESULT "Total number of processes matching ${1} is $RESULT|${RESULT};"
+}
+
+f_countbasename_sub1() {
+	for PROCESS in `f_ps -o args | awk -F' ' '{print $1}'`
+	do
+		SLASH=`echo "${PROCESS}" | egrep '^/' | wc -l | sed 's/ //g'`
+		if { test ${SLASH} -eq 1 ; }
+		then
+			basename "${PROCESS}"
+		else
+			echo "${PROCESS}"
+		fi
+	done
+}
+f_countbasename() {
+	if { test -z "${1}" ; }
+	then
+		echo countbasename requires an input value
+		exit 99
+	fi
+	RESULT=`f_countbasename_sub1 | egrep "${1}" | grep -v grep | wc -l | sed 's/ //g'`
+	f_check $RESULT "Total number of processes matching ${1} is: $RESULT|${RESULT};"
+}
+
+f_totalproc() {
+	RESULT=`f_ps -o s | wc -l | sed 's/ //g'`
+	# Don't count the header
+	RESULT=`echo $RESULT - 1 | bc | sed 's/ //g'`
+	f_check $RESULT "Total number of processes is: $RESULT|${RESULT};"
+}
+
+f_zombiecount() {
+	RESULT=`f_ps -o s |egrep '^Z'|wc -l|sed 's/ //g'`
+	f_check $RESULT "Total number of zombies: $RESULT|${RESULT};"
+}
+
+f_uname() {
+	f_execute uname -a
+	exit 0
+}
+
+f_mountpoints() {
+	f_df | grep -v Filesystem | awk -F' ' '{print $6}'
+	exit 0
+}
+
+f_unspecified() {
+	echo You must specify what test to perform...
+	exit 99
+}
+
+f_diskpercent() {
+	if { test -z "${1}" ; }
+	then
+		echo diskpercent requires an input value
+		exit 99
+	fi
+	# MODIFIED TO WORK WITH LONG DEVICENAMES ON HP-UX. 1.0rc2 2007-07-05 Carl Ekman
+	#RESULT=`f_df "${1}"| grep -v Filesystem | grep "${1}$" | awk -F' ' '{print $5}' | sed 's/%//g' | sed 's/[^0-9]//g' | tail -1`
+	PART=`f_df "${1}"| grep -v Filesystem`
+	RESULT=`echo $PART | awk -F' ' '{print $5}' | sed 's/%//g' | sed 's/[^0-9]//g' | tail -1`
+	#
+	if { test -z "${RESULT}" ;}
+	then
+		echo "${1} is not a filesystem"
+		exit 99
+	fi
+	f_check $RESULT "Space used on ${1} is ${RESULT}%|${RESULT};"
+}
+
+f_diskkbyte() {
+	if { test -z "${1}" ; }
+	then
+		echo diskkbyte requires an input value
+		exit 99
+	fi
+	# MODIFIED TO WORK WITH LONG DEVICENAMES ON HP-UX. 1.0rc2 2007-07-05 Carl Ekman
+	#RESULT=`f_df "${1}"| grep -v Filesystem | grep "${1}$" | awk -F' ' '{print $4}' | sed 's/[^0-9]//g'|tail -1`
+	PART=`f_df "${1}"| grep -v Filesystem`
+	RESULT=`echo $PART | awk -F' ' '{print $4}' | sed 's/[^0-9]//g'|tail -1`
+	#
+	if { test -z "${RESULT}" ;}
+	then
+		echo "${1} is not a filesystem"
+		exit 99
+	fi
+	f_check $RESULT "Space free on ${1} is ${RESULT} Kbytes|${RESULT};"
+}
+
+f_cpu() {
+	case $RSYS in
+	NetBSD|OpenBSD|FreeBSD)
+		for VALUE in `f_execute iostat`;do
+			IDLE=$VALUE
+		done
+		RESULT=`echo 100 - $VALUE | bc | sed 's/ //g'`
+	;;
+	*)
+		CPU_FORMULA_PART=`f_ps -o pcpu | grep -v [A-Z] | sed 's/$/ +/g'`
+		CPU_FORMULA=`echo $CPU_FORMULA_PART 0`
+		CPU_REAL=`printf "$CPU_FORMULA / 1 \n" | bc`
+		#
+		RESULT=`printf "scale = 0 \n ( $CPU_REAL + 0.5 ) / 1 \n" | bc `
+	;;
+	esac
+
+	f_check $RESULT "CPU Usage is ${RESULT}%|${RESULT}"
+}
+
+f_memusage() {
+	RESULT_PART=`f_ps -o vsz | grep -v [A-Z] | sed 's/$/ +/g'`
+	RESULT=`echo $RESULT_PART 0 | bc`
+	f_check $RESULT "Total memory usage (VSZ): ${RESULT} Kbytes|${RESULT};"
+}
+
+f_dproc() {
+	RESULT=`f_ps -o s | egrep '^D' | wc -l |sed 's/ //g'`
+	f_check $RESULT "Number of processes in uninterruptable sleep: ${RESULT}|${RESULT};"
+}
+
+f_rproc() {
+	RESULT=`f_ps -o s | egrep '^R' | wc -l |sed 's/ //g'`
+	f_check $RESULT "Number of running processes: ${RESULT}|${RESULT};"
+}
+f_drproc() {
+	RESULT=`f_ps -o s | egrep '^R|^D' | wc -l |sed 's/ //g'`
+	f_check $RESULT "Processes running or in uninterruptable sleep: ${RESULT}|${RESULT};"
+}
+#
+#
+RSYS=`f_execute uname`
+case $test in
+countproc) f_countproc "${input_1}";;
+countbasename) f_countbasename "${input_1}";;
+totalproc) f_totalproc ;;
+zombiecount) f_zombiecount ;;
+mountpoints) f_mountpoints ;;
+uname) f_uname ;;
+unspecified) f_unspecified ;;
+diskpercent) f_diskpercent "${input_1}";;
+diskkbyte) f_diskkbyte "${input_1}";;
+cpu) f_cpu ;;
+memusage) f_memusage ;;
+dproc) f_dproc ;;
+rproc) f_rproc ;;
+drproc) f_drproc ;;
+*)
+	echo The test you specified does not exist. Use -h for help.
+	exit 99
+;;
+esac

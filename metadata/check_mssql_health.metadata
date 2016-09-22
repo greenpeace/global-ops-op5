@@ -1,0 +1,73 @@
+[commands]
+check_mssql_health_cpu-busy=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode cpu-busy --warning $ARG3$ --critical $ARG4$
+check_mssql_health_io-busy=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode io-busy --warning $ARG3$ --critical $ARG4$
+check_mssql_health_full-scans=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode full-scans --warning $ARG3$ --critical $ARG4$
+check_mssql_health_connected-users=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode connected-users --warning $ARG3$ --critical $ARG4$
+check_mssql_health_transactions_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode transactions --warning $ARG3$ --critical $ARG4$
+check_mssql_health_transactions=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode transactions --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_batch-requests=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode batch-requests --warning $ARG3$ --critical $ARG4$
+check_mssql_health_latches-waits=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode latches-waits --warning $ARG3$ --critical $ARG4$
+check_mssql_health_latches-wait-time=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode latches-wait-time --warning $ARG3$ --critical $ARG4$
+check_mssql_health_locks-waits=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode locks-waits --warning $ARG3$ --critical $ARG4$
+check_mssql_health_locks-timeouts=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode locks-timeouts --warning $ARG3$ --critical $ARG4$
+check_mssql_health_locks-deadlocks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode locks-deadlocks --warning $ARG3$ --critical $ARG4$
+check_mssql_health_sql-recompilations=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode sql-recompilations --warning $ARG3$ --critical $ARG4$
+check_mssql_health_sql-initcompilations=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode sql-initcompilations --warning $ARG3$ --critical $ARG4$
+check_mssql_health_total-server-memory=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode total-server-memory --warning $ARG3$ --critical $ARG4$
+check_mssql_health_mem-pool-data-buffer-hit-ratio=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode mem-pool-data-buffer-hit-ratio --warning $ARG3$ --critical $ARG4$
+check_mssql_health_lazy-writes=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode lazy-writes --warning $ARG3$ --critical $ARG4$
+check_mssql_health_page-life-expectancy=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode page-life-expectancy --warning $ARG3$ --critical $ARG4$
+check_mssql_health_free-list-stalls=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode free-list-stalls --warning $ARG3$ --critical $ARG4$
+check_mssql_health_checkpoint-pages=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode checkpoint-pages --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-online_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-online --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-online=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-online --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-free_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-free --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-free=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-free --warning $ARG3$ --critical $ARG4$ -name $ARG5$
+check_mssql_health_database-backup-age_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-backup-age --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-backup-age=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-backup-age --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-logbackup-age_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logbackup-age --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-logbackup-age=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logbackup-age --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-file-auto-growths_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-auto-growths --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-file-auto-growths=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-auto-growths --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-logfile-auto-growths_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logfile-auto-growths --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-logfile-auto-growths=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logfile-auto-growths --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-datafile-auto-growths_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-datafile-auto-growths --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-datafile-auto-growths=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-datafile-auto-growths --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-file-auto-shrinks_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-auto-shrinks --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-file-auto-shrinks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-auto-shrinks --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-logfile-auto-shrinks_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logfile-auto-shrinks --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-logfile-auto-shrinks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-logfile-auto-shrinks --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-datafile-auto-shrinks_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-datafile-auto-shrinks --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-datafile-auto-shrinks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-datafile-auto-shrinks --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_database-file-dbcc-shrinks_all=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-dbcc-shrinks --warning $ARG3$ --critical $ARG4$
+check_mssql_health_database-file-dbcc-shrinks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode database-file-dbcc-shrinks --warning $ARG3$ --critical $ARG4$ --name $ARG5$
+check_mssql_health_failed-jobs=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode failed-jobs --warning $ARG3$ --critical $ARG4$
+check_mssql_health_sql=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode sql --warning $ARG3$ --critical $ARG4$
+check_mssql_health_sql-runtime=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode sql-runtime --warning $ARG3$ --critical $ARG4$
+check_mssql_health_list-databases=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode list-databases --warning $ARG3$ --critical $ARG4$
+check_mssql_health_list-datafiles=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode list-datafiles --warning $ARG3$ --critical $ARG4$
+check_mssql_health_list-locks=$USER1$/check_mssql_health --server $HOSTADDRESS$ --username '$ARG1$' --password '$ARG2$' --mode list-locks --warning $ARG3$ --critical $ARG4$
+
+[name]
+check_mssql_health
+
+[info]
+Check Microsoft SQL Servers
+
+[why]
+To check status of MS SQL servers.
+
+[how]
+Connects to a MS SQL database and checks if it is accepting connections. Lets you specify database username, password. It can also accept a query and thresholds for the number of rows that the query may return.
+
+[platforms]
+Windows
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+microsoft windows, sql server, database

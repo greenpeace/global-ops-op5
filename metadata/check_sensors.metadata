@@ -1,0 +1,20 @@
+[name]
+check_sensors
+
+[info]
+Checks hardware status.
+[why]
+Gives you a knowledge of the hardware status, temperature and so on.
+[how]
+Checks status on your local hardware using the lm_sensors package.
+[platforms]
+Unix with lmsensors installed
+
+[categories]
+Hardware
+
+[support]
+4
+
+[tags]
+lmsensor, hardware, temperature, unix, linux

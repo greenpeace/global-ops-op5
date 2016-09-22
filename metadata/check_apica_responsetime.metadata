@@ -1,0 +1,28 @@
+[commands]
+check_apica_responsetime=$USER1$/check_apica_responsetime.py -U $ARG1$ -P $ARG2$ -i $ARG3$
+check_apica_authfile_responsetime=$USER1$/check_apica_responsetime.py -a $ARG1$ -i $ARG2$
+
+[name]
+check_apica_responsetime
+
+[info]
+The plugin is checking the response time and status of the latest check at your Apica WPM service.
+check_apica_responsetime will alert if the severity is not I (Informational).
+
+[why]
+This is a way to extend your normal monitoring by having the Apica WPM service doing advanced web application monitoring for you. Let op5 Monitor take care of the notifications and include the results from Apica in the reports.
+
+[how]
+First of all you need to get an account at Apica. The plugin will then connect to the Apica WPM HTTP API and ask for status of your WPM check. The plugin will then get the result back in json format. It is only the severity that will trigger alerts, not the response time. The thresholds are set inside your Apica account.
+
+[platforms]
+Apica WPM
+
+[categories]
+Web
+
+[support]
+4
+
+[tags]
+web,http,apica

@@ -1,0 +1,21 @@
+[name]
+check_ldaps
+
+[info]
+Tests connections to an LDAPS server.
+[why]
+To see that the LDAPS server is working. This can be used to check for example Windows Active Directory servers.
+[how]
+By connecting to the LDAPS server. You can specify protocol version, password and diffrent search criterias. You can also set thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+ldap, secure ldap

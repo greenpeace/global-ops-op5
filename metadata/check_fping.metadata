@@ -1,0 +1,23 @@
+[name]
+check_fping
+
+[info]
+Checks a list of host over ICMP to check if they are alive or not.
+
+[why]
+Can be used to monitor a set of hosts to monitor if they are alive or not.
+
+[how]
+This plugin will use the fping command to ping the specified host(s) for a fast check. 
+
+[platforms]
+Not platform dependent
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+icmp, ping, host

@@ -1,0 +1,23 @@
+[name]
+check_multiurl
+
+[info]
+Fetches a list of url's and checks them all in paralell.
+
+[why]
+
+
+[how]
+Uses wget to fetch the list of URLs that should be checked. check_http is then used to check the URLs.
+
+[platforms]
+No platform dependency
+
+[categories]
+Networking, Web
+
+[support]
+4
+
+[tags]
+web, network, http

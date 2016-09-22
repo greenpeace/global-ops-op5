@@ -1,0 +1,26 @@
+[commands]
+check_citrix=$USER1$/check_citrix -C $HOSTADDRESS$ -L -P "$ARG1$"
+
+[name]
+check_citrix
+
+[info]
+Checking if the Citrix master browser returns  a 'published application' list that contain names specified in the check command.
+
+[why]
+To make sure the right applications is published.
+
+[how]
+By communication with the Citrix server using the ICA protocol and requesting a list of published applications. It also enables you to create notifications if a application is missing from the list.
+
+[platforms]
+Not platform dependent
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+citrix, published application, ica

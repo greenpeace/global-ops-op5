@@ -1,0 +1,22 @@
+[name]
+check_movex
+
+[info]
+This plugin check various Movex/M3 related system information.
+
+[why]
+ 
+[how]
+It does so by connecting to the M3 webserver and fetching relevant url's.
+
+[platforms]
+Movex/M3 systems
+
+[categories]
+ERP systems
+
+[support]
+6
+
+[tags]
+movex, m3

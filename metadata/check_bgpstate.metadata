@@ -1,0 +1,22 @@
+[commands]
+check_bgpstate=$USER1$/check_bgpstate -c $ARG1$ $HOSTADDRESS$
+[name]
+check_bgpstate
+
+[info]
+Monitors BGP Sessions.
+[why]
+Identify overloaded servers.
+[how]
+Checks configured bgp peers using SNMP.
+[platforms]
+Not platform dependent.
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+network, BGP

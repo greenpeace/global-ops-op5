@@ -1,0 +1,26 @@
+[commands]
+check_om_chassis=$USER1$/check_om_chassis
+
+[name]
+check_om_chassis
+
+[info]
+Checks chassi state of DELL servers using the omreport command from the Dell OpenManage distribution.
+
+[why]
+To make sure you will be notified when there is any chassi problems with your Dell servers.
+
+[how]
+The communication between op5 Monitor and Dell OpenManage is performed by SNMP. 
+
+[platforms]
+Dell servers.
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+dell, hardware, open manager, chassi

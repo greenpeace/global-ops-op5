@@ -1,0 +1,42 @@
+[commands]
+check_mssql_backup_job=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D msdb -q "SELECT TOP 1 sysjobhistory.message FROM sysjobhistory join sysjobs  on (sysjobhistory.job_id=sysjobs.job_id) WHERE sysjobs.name = '$ARG3$' AND sysjobhistory.step_name = '(Job outcome)' AND DATEDIFF(dd, CONVERT(CHAR(8), sysjobhistory.run_date), GETDATE()) < 1 ORDER BY sysjobhistory.run_date,sysjobhistory.run_time" -s  -r -e  ".*The job succeeded\..*"
+check_mssql_query_string_regex=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D $ARG3$ -q "$ARG4$" -s  -r -e  "$ARG5$"
+check_mssql_query_count=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D $ARG3$ -q "$ARG4$" -s -W $ARG5$ -C $ARG6$ -s
+check_mssql_query_reponstime=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D $ARG3$ -q "$ARG4$" -s -w $ARG5$ -c $ARG6$ -s
+check_mssql_blocked_processes=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -D master -q "select count(lastwaittype) from sysprocesses where blocked != 0" -s -W $ARG3$ -C $ARG4$ -l "Num of blocked processes"
+check_mssql_backup_job_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D msdb -q "SELECT TOP 1 sysjobhistory.message FROM sysjobhistory join sysjobs  on (sysjobhistory.job_id=sysjobs.job_id) WHERE sysjobs.name = '$ARG3$' AND sysjobhistory.step_name = '(Job outcome)' AND DATEDIFF(dd, CONVERT(CHAR(8), sysjobhistory.run_date), GETDATE()) < 1 ORDER BY sysjobhistory.run_date,sysjobhistory.run_time" -s  -r -e  ".*The job succeeded\..*"
+check_mssql_query_string_regex_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D $ARG3$ -q "$ARG4$" -s  -r -e  "$ARG5$"
+check_mssql_query_count_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D $ARG3$ -q "$ARG4$" -s -W $ARG5$ -C $ARG6$ -s
+check_mssql_query_reponstime_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D $ARG3$ -q "$ARG4$" -s -w $ARG5$ -c $ARG6$ -s
+check_mssql_blocked_processes_ad_user=$USER1$/check_sql -H $HOSTADDRESS$ -U "$ARG1$" -P "$ARG2$" -d Sybase -T 8.0 -D master -q "select count(lastwaittype) from sysprocesses where blocked != 0" -s -W $ARG3$ -C $ARG4$ -l "Num of blocked processes"
+[name]
+check_sql
+
+[info]
+Check various SQL Servers. Requires DBI module for selected database.
+
+[why]
+You can use this plugin to check a lot of different databases such as:
+MySQL
+PGSQL
+MSSQL
+DB2
+etc.
+
+This plugin makes it easy to execute any kind of SQL-query to the monitored database.
+
+[how]
+It connects to the database using the database type specific DBI module.
+
+[platforms]
+Any database you you can find perl DBI modules for.
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+mysql, postgresql, microsoft sql, db2, dbi, database
+

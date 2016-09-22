@@ -1,0 +1,30 @@
+[commands]
+check_hp_proliant_hardware_remote=$USER1$/check_hpasm --hostname=$HOSTADDRESS$ --community=$ARG1$ --servertype=proliant
+check_hp_bladesystem_hardware_remote=$USER1$/check_hpasm --hostname=$HOSTADDRESS$ --community=$ARG1$ --servertype=bladesystem
+
+[name]
+check_hpasm
+
+[info]
+Check status of HP Proliant servers and HP Blade systems
+
+[why]
+To check the status of processors, power supplies, memory modules, fans, temperature
+and raids on your HP machines.
+
+[how]
+The plugin may either be asking a remote machine over SNMP or it could be executed locally.
+It needs to have HP asm installed on the server to be able to get the information needed.
+If you run it locally on a HP server you need to have the command hpasmcli installed.
+
+[platforms]
+HP Proliant, HP Blade systems
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+hp, insight, hardware, powersupply, fan, raid, snmp, blade system, temperature

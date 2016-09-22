@@ -1,0 +1,23 @@
+[name]
+check_snmp_win
+
+[info]
+The plugin is used to monitor windows servers over SNMP instead of using any agent.
+
+[why]
+Sometimes you are unable to install an agent on the monitored windows server. Setting up all SNMP services by hand is a hard work. Then you have this plugin that already made the job for you.
+
+[how]
+The monitored data is checked over SNMP.
+
+[platforms]
+Windows
+
+[categories]
+SNMP, Operating Systems
+
+[support]
+5
+
+[tags]
+microsoft windows, cpu, memory, snmp, os

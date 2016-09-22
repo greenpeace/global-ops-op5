@@ -1,0 +1,31 @@
+[commands]
+check-host-alive-http=$USER1$/check_tcp -H $HOSTADDRESS$ -p 80 -w 4 -c 5 -t 6
+check-host-alive-telnet=$USER1$/check_tcp -H $HOSTADDRESS$ -p 23 -w 4 -c 5 -t 6
+check_imap3=$USER1$/check_tcp -H $HOSTADDRESS$ -p 220
+check_imaps=$USER1$/check_tcp -H $HOSTADDRESS$ -p 993
+check_tcp=$USER1$/check_tcp -H $HOSTADDRESS$ -p $ARG1$
+check_telnet=$USER1$/check_tcp -H $HOSTADDRESS$ -p 23
+[name]
+check_tcp
+
+[info]
+Tests connection to a TCP port.
+[why]
+To check status of diffrent applications that are listening on a TCP port.
+[how]
+Connect to a specified TCP port and checks the connection. Let you specify port number, send and expect string and also to set thresholds on responstime.
+[platforms]
+Not platform dependent
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+tcp, network, port
+check_telnet=telnet port
+check_tcp=general tcp port
+check-host-alive-http=host alive over tcp 80
+check-host-alive-telnet=host alive over tcp 23

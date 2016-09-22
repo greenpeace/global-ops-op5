@@ -1,0 +1,43 @@
+[commands]
+check_nrpe=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c $ARG1$
+check_nrpe_disk_root=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_disk_root
+check_nrpe_disk_var=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_disk_var
+check_nrpe_load=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_load
+check_nrpe_proc_crond=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_proc_crond
+check_nrpe_proc_named=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_proc_named
+check_nrpe_proc_syslogd=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_proc_syslogd
+check_nrpe_proc_total=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_proc_total
+check_nrpe_proc_zombie=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_proc_zombie
+check_nrpe_swap=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_swap
+check_nrpe_users=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c check_users
+check_nrpe_win_services=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckServiceState -a ShowAll $ARG1$
+check_nrpe_win_counter=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -t 20 -c CheckCounter -a "Counter=$ARG1$" ShowAll $ARG2$ $ARG3$
+check_nrpe_win_cpu=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckCPU -a ShowAll=long $ARG1$
+check_nrpe_win_drivesize=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckDriveSize -a ShowAll=long $ARG1$
+check_nrpe_win_eventlog=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckEventLog -a "$ARG1$"
+check_nrpe_win_ram=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckMem -a ShowAll=long type=physical MaxWarn=$ARG1$ MaxCrit=$ARG2$
+check_nrpe_win_swap=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckMem -a ShowAll=long type=paged MaxWarn=$ARG1$ MaxCrit=$ARG2$
+check_nrpe_win_uptime=$USER1$/check_nrpe -s -H $HOSTADDRESS$  -c CheckUpTime -a ShowAll MinWarn=0s
+check_mssql_buffer_cache_hit_ratio=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckCounter -a "\\SQLServer:Buffer Manager\Buffer cache hit ratio" ShowAll MinWarn=$ARG1$ MinCrit=$ARG2$
+check_nrpe_win_process=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckProcState -a ShowAll "$ARG1$"=started
+
+[name]
+check_nrpe
+
+[info]
+Checks remote Unix and Windows servers running NRPE and NRPE_NT.
+[why]
+To be able to check status on remote Unix and Windows hosts.
+[how]
+Let you run plugins on remote Unix servers running NRPE and windows servers running NRPE_NT. You can use check_nrpe to run all plugins that normally only checks status on a local server. You can also use NRPE to run checks to test stuff on the network from a remote box instead of from the monitor server. What you can check is configured in nrpe.cfg configuration file on the remote server and of the set if plugins on the remote server.
+[platforms]
+Unix and Microsoft Windows
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+nrpe, unix, linux, microsoft windows

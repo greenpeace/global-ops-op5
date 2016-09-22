@@ -1,0 +1,26 @@
+[commands]
+check_dig=$USER1$/check_dig -H $HOSTADDRESS$ -l $ARG1$
+[name]
+check_dig
+
+[info]
+Checks DNS Servers on a specific host using dig.
+
+[why]
+To verify the functionality of the DNS server.
+
+[how]
+By using the dig command to resolve a hostname. The plugin lets you specify a hostname and the expected ipaddress.
+
+[platforms]
+Not platform dependent.
+
+
+[categories]
+DNS
+
+[support]
+4
+
+[tags]
+dns, domain name, hostname, resolve

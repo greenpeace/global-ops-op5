@@ -1,0 +1,20 @@
+[name]
+check_mrtgtraf
+
+[info]
+Checks for traffic usage in an MRTG traffic graph logfile.
+[why]
+If you have MRTG installed and whant to monitor the traffic usage but not polling the router/switch but MRTG instead.
+[how]
+By looking in the logfile and specifying thresholds for incoming and outgoing traffic. Note: this only works with old versions of MRTG that doesnt uses rrdtool. We recommend the use of check_traffic instead.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+6
+
+[tags]
+mrtg, network, traffic

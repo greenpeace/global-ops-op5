@@ -1,0 +1,23 @@
+[name]
+check_snmp_nsbox
+
+[info]
+This plugin checks vhost and diode status on your NetSecureOne Netbox.
+
+[why]
+To make sure the status of the diodes and vhosts are OK.
+
+[how]
+By SNMP.
+
+[platforms]
+NetSecureOne Netbox
+
+[categories]
+SNMP
+
+[support]
+5
+
+[tags]
+NetSecureOne, Netbox, vhost, diod status, snmp

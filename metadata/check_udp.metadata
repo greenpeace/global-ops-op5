@@ -1,0 +1,22 @@
+[commands]
+check_udp=$USER1$/check_udp -H $HOSTADDRESS$ -p $ARG1$
+[name]
+check_udp
+
+[info]
+Tests connection to a UDP port
+[why]
+To check status of applications that listens on a UDP port.
+[how]
+Connect to a specified UDP port and checks the connection. Lets you specify port number, send and expect string and also to set thresholds on responstime.
+[platforms]
+Not platform dependent
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+network, udp

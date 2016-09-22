@@ -1,0 +1,23 @@
+[name]
+check_snmp_process
+
+[info]
+This plugin checks if process are running, the number that are running, memory and cpu used.
+
+[why]
+
+[how]
+The plugin checks, by SNMP, if there is at least one process matching the filter when no warning or critical levels are set.
+The filter is treated as a regular expression by default, but you can deactivate.
+
+[platforms]
+Windows, Unix/Linux, AS400
+
+[categories]
+SNMP
+
+[support]
+5
+
+[tags]
+process, memory, cpu, microsoft windows, unic, linux, as400

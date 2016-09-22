@@ -1,0 +1,23 @@
+[commands]
+check_dummy=$USER1$/check_dummy $ARG1$
+
+[name]
+check_dummy
+
+[info]
+Returns what ever status and output you specify.
+[why]
+This can be used if you want to add hosts in your configuration that you cannot monitor but really want to include in the network map anyway.
+[how]
+N/A
+[platforms]
+Not platform dependent
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+dummy

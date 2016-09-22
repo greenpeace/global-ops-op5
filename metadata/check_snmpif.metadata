@@ -1,0 +1,46 @@
+[commands]
+check_traffic_bps_v1=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -B -w $ARG3$ -c $ARG4$
+check_traffic_bps_v2=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -B -w $ARG3$ -c $ARG4$ -v 2c
+check_traffic_bps_v3=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ $ARG1$ -i $ARG2$ -B -w $ARG3$ -c $ARG4$
+check_traffic_bps_v1_snmpport=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ -C $ARG1$ -p $ARG2$ -i $ARG3$ -B -w $ARG4$ -c $ARG5$
+check_traffic_bps_v2_snmpport=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ -C $ARG1$ -p $ARG2$ -i $ARG3$ -B -w $ARG4$ -c $ARG5$ -v 2c
+check_traffic_bps_v3_snmpport=$USER1$/check_snmpif traffic -H $HOSTADDRESS$ $ARG1$ -p $ARG2$ -i $ARG3$ -B -w $ARG4$ -c $ARG5$
+check_snmpif_errors_v1=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$
+check_snmpif_errors_v2=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$ -v 2c
+check_snmpif_errors_v3=$USER1$/check_snmpif errors -H $HOSTADDRESS$ $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$
+check_snmpif_status_v1=$USER1$/check_snmpif status -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$
+check_snmpif_status_v2=$USER1$/check_snmpif status -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$ -v 2c
+check_snmpif_status_v3=$USER1$/check_snmpif status -H $HOSTADDRESS$ $ARG1$ -i $ARG2$ -w $ARG3$
+check_iferrors_v1=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$ -t 10
+check_iferrors_v2=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$ -t 10 -v 2c
+check_iferrors_v3=$USER1$/check_snmpif errors $HOSTADDRESS$ $ARG1$ -i $ARG2$ -w $ARG3$ -c $ARG4$ -t 10
+check_iferrors_v1_snmpport=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -p $ARG2$ -i $ARG3$ -w $ARG4$ -c $ARG5$ -t 10
+check_iferrors_v2_snmpport=$USER1$/check_snmpif errors -H $HOSTADDRESS$ -C $ARG1$ -p $ARG2$ -i $ARG3$ -w $ARG4$ -c $ARG5$ -t 10 -v 2c
+check_iferrors_v3_snmpport=$USER1$/check_snmpif errors $HOSTADDRESS$ $ARG1$ -p $ARG2$ -i $ARG3$ -w $ARG4$ -c $ARG5$ -t 10
+check_ifoperstatus_v1=$USER1$/check_snmpif status -H $HOSTADDRESS$ -C $ARG1$ -v 1 -k $ARG2$
+check_ifoperstatus_v2=$USER1$/check_snmpif status -H $HOSTADDRESS$ -C $ARG1$ -v 2 -k $ARG2$
+check_ifoperstatus_v3=$USER1$/check_snmpif status -H $HOSTADDRESS$ $ARG1$ -v 3 -k $ARG2$
+
+[name]
+check_snmpif
+
+[info]
+Checks an inteface traffic, status or errors using snmp
+
+[why]
+For example to get notified if you suddenly have strange pattern in you network, eg virus attack.
+
+[how]
+Polls traffic/status/errors usage on a SNMP enabled network device, for example a router or a switch. The plugin lets you specify threshold values.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+network, traffic, interface status, errors, snmp

@@ -1,0 +1,47 @@
+[commands]
+check_nrpe_linux_cpu_usage_idle=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_idle
+check_nrpe_linux_cpu_usage_iowait=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_iowait
+check_nrpe_linux_cpu_usage_nice=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_nice
+check_nrpe_linux_cpu_usage_steal=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_steal
+check_nrpe_linux_cpu_usage_system=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_system
+check_nrpe_linux_cpu_usage_total=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_total
+check_nrpe_linux_cpu_usage_user=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_cpu_usage_user
+check_nrpe_linux_disk_io_requests=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_disk_io_requests
+check_nrpe_linux_disk_usage_root=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_disk_usage_root
+check_nrpe_linux_disk_usage_all=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_disk_usage_all
+check_nrpe_linux_linux_total_open_sockets=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_total_open_sockets
+check_nrpe_linux_load=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_load
+check_nrpe_linux_mem_and_swap=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_mem_and_swap
+check_nrpe_linux_network=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_network
+check_nrpe_linux_paging_in_out=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_paging_in_out
+check_nrpe_linux_total_open_files_inodes=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_total_open_files_inodes
+check_nrpe_linux_total_processes=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_total_processes
+check_nrpe_linux_uptime=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_uptime
+
+[name]
+check_linux_stats
+
+[info]
+Monitoring cpu, disk, io, processes, paging and a lot more on a Linux host.
+
+[why]
+To make sure you are aware of how your Linux server's OS i doing.
+
+[how]
+The plugin are supposed to be used localy on that Linux host you like to monitor and
+the plugin needs to be executed via NRPE.
+To be able to use the plugin you need to have the following perl module installed
+on the system where the plugin shall be executed:
+Sys::Statistics::Linux
+
+[platforms]
+Linux
+
+[categories]
+Operating Systems
+
+[support]
+4
+
+[tags]
+Linux, cpu, memory, io, files, processes, paging, swap, disk

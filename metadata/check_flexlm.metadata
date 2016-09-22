@@ -1,0 +1,20 @@
+[name]
+check_flexlm
+
+[info]
+Checks available flexlm licence managers.
+[why]
+To not run out of available licences.
+[how]
+By using the lmstat program.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+unix, lmstat, flexlm license

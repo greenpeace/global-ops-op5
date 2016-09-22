@@ -1,0 +1,25 @@
+[commands]
+check_route=$USER1$/check_route -H $HOSTADDRESS$ -P $ARG1$ -S $ARG2$ -C
+
+[name]
+check_route
+
+[info]
+This plugin checks what route the IP traffic takes.
+
+[why]
+To help you keep track of what route is used for certain traffic. You may use the plugin to see what Internet connection your traffic is using at the moment.
+
+[how]
+By analyzing the result from a trace made with the command traceroute.
+
+[platforms]
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+route, traceroute, network

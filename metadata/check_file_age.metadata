@@ -1,0 +1,20 @@
+[name]
+check_file_age
+
+[info]
+Checks the age of a file.
+[why]
+This can be useful if you have a file that shall be updated with a certain interval. With this plugin you can get notified if the update doesn't happen.
+[how]
+By looking at the attribute data on the file.
+[platforms]
+Unix
+
+[categories]
+File System
+
+[support]
+4
+
+[tags]
+file, file system, unix, linux

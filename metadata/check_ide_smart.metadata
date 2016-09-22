@@ -1,0 +1,25 @@
+[commands]
+
+[name]
+check_ide_smart
+
+[info]
+This plugin checks a local hard drive with the (Linux specific) SMART interface http://smartlinux.sourceforge.net/smart/index.php.
+
+[why]
+To get control over the local hard drives on your server.
+
+[how]
+By checking the local hard drive with ioctl.
+
+[platforms]
+Linux host with the SMART interface installed.
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+hardware, storage, ide, smart, linux

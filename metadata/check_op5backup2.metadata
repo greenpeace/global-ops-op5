@@ -1,0 +1,26 @@
+[commands]
+check_op5backup_state=$USER1$/check_op5backup2
+
+[name]
+check_op5backup2
+
+[info]
+This plugin is checking backup process state.
+
+[why]
+To notify you about latest backup process state.
+
+[how]
+Checking the latest backup log.
+
+[platforms]
+A server running any op5 product.
+
+[categories]
+Backup
+
+[support]
+4
+
+[tags]
+op5, backup

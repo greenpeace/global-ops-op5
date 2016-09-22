@@ -1,0 +1,4 @@
+<testcasefile>testcases.xml</testcasefile>
+<globalhttplog>onfail</globalhttplog>
+<reporttype>nagios</reporttype>
+

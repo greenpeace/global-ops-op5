@@ -1,0 +1,20 @@
+[name]
+check_iferrors
+
+[info]
+Checks for errors on a network interface.
+[why]
+To be aware about and locate network problems.
+[how]
+By using SNMP. You can specify tresholds on the amount off errors.
+[platforms]
+Not platform dependent
+
+[categories]
+Networking
+
+[support]
+5
+
+[tags]
+network, interface errors, snmp

@@ -1,0 +1,20 @@
+[name]
+check_ssmtp
+
+[info]
+Checks status of a Secure SMTP  server.
+[why]
+To see status of your secure SMTP mailserver.
+[how]
+Connects to a secure SMTP server and checks status. Lets you specify expected responce string. You can also run a command and specify thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+[categories]
+Mail
+
+[support]
+4
+
+[tags]
+email, smtp, secure smtp, tcp

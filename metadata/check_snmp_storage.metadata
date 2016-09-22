@@ -1,0 +1,29 @@
+[commands]
+check_snmp_win_storage=$USER1$/check_snmp_storage -H $HOSTADDRESS$ -C $ARG1$ -m $ARG2$ -w $ARG3$ -c $ARG4$
+check_snmp_win_virtual_mem=$USER1$/check_snmp_storage -H $HOSTADDRESS$ -C $ARG1$ -m "Virtual Memory" -w $ARG2$ -c $ARG3$
+check_snmp_win_physical_mem=$USER1$/check_snmp_storage -H $HOSTADDRESS$ -C $ARG1$ -m "Physical Memory" -w $ARG2$ -c $ARG3$
+check_snmp_storage=$USER1$/check_snmp_storage -H $HOSTADDRESS$ -2 -C $ARG1$ -m $ARG2$ -w $ARG3$ -c $ARG4$
+
+[name]
+check_snmp_storage
+
+[info]
+Checks storage information on both harddrives and RAM on various hardware using snmp.
+
+[why]
+To monitor storage usage over SNMP if SNMP is the only way to monitor the server.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Not platform depended
+
+[categories]
+SNMP, File System
+
+[support]
+5
+
+[tags]
+storage, hardware, snmp

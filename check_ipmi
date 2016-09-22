@@ -1,0 +1,130 @@
+#! /usr/bin/php
+<?php
+# License: GPL
+# Copyright (c) 2007 op5 AB
+# Author: Hugo Hallqvist <op5-users@lists.op5.com>
+#
+# For direct contact with any of the op5 developers send a mail to
+# op5-users@lists.op5.com
+# Discussions are directed to the mailing list op5-users@op5.com,
+# see http://lists.op5.com/mailman/listinfo/op5-users
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2 as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Description:
+# Nagios plugin for locally checking hardware status (fans, voltage) via ipmi.
+# It utilizes ipmitool to get results from kernel.
+#
+# Usage: check_ipmi.php <filename>
+#
+# filename points to a file which is used as a cache for speeding up the check.
+
+/* Dont output debug messages */
+error_reporting(E_ALL ^ (E_USER_NOTICE | E_USER_WARNING | E_WARNING | E_NOTICE));
+ini_set("display_errors", "On");
+
+define("UNKNOWN", 3);
+define("CRITICAL", 2);
+define("WARNING", 1);
+define("OK", 0);
+define(IPMITOOL_PATH, "ipmitool");
+
+# Set up timeout for plugin.
+declare(ticks = 1);
+
+function timeout_signal_handler ($signal) {
+	pexit(UNKNOWN, "Plugin timed out.");
+}
+
+pcntl_alarm(20); # Default timeout to 20 seconds.
+pcntl_signal(SIGALRM, "timeout_signal_handler", true);
+
+function usage() {
+	global $argv;
+	echo "Usage: check_ipmi.php <filename>\n";
+	echo "\n";
+	echo "  <filename> indicates the cache file for speeding up sensor readings.\n";
+}
+
+function pexit($result_code, $message, $print_usage = false) {
+	$result_names = array("OK", "WARNING", "CRITICAL", "UNKNOWN");
+
+	echo sprintf("%s\n", $message);
+	if ($print_usage) {
+		echo "\n";
+		usage();
+	}
+	exit($result_code);
+}
+
+function create_sdr_cache_file($filename) {
+	if (file_exists($filename)) {
+		return false;
+	}
+	$command = 'sudo -u root -n -- ' . IPMITOOL_PATH . " sdr dump " . $filename;
+	$handle = exec($command . " 2>&1", $output, $ret);
+	$output = '  ' . join("\n  ", $output);
+	if ($ret) {
+		pexit(UNKNOWN, "Error initializing database:\n$output");
+	}
+	return True;
+}
+
+## Start of main program ##
+
+if (count($argv) < 2) {
+	pexit(UNKNOWN, "No databasename given.", true);
+}
+$cache_filename = $argv[1];
+if (! file_exists($cache_filename)) {
+	create_sdr_cache_file($cache_filename);
+	pexit(UNKNOWN, "New database initialized, no results yet.");
+}
+
+exec('sudo -u root -n -- ' . IPMITOOL_PATH . " -S $cache_filename sdr 2>&1", $lines, $ret);
+if ($ret) {
+	$long_output = '  ' . join("\n  ", $lines);
+	pexit(UNKNOWN, "Failed to gather data\n$long_output\n");
+}
+
+# VRD 1 Temp       | 34 degrees C      | ok
+# CMOS Battery     | 3.12 Volts        | ok
+# VCORE            | 0x01              | ok
+
+$bad_sensors = array();
+$nsensors = 0;
+foreach ($lines as $line) {
+	$matches = array();
+	if (preg_match("/[^\|]*\|[^\|]*\|[^\|]*/", $line, $matches)) {
+		$arr = preg_split("/[ ]*\|[ ]*/", trim($line));
+		if (0 == strcasecmp($arr[2], "ns"))
+		  continue;
+		$nsensors++;
+		if (0 != strcasecmp($arr[2], "ok"))
+		  $bad_sensors[] = $arr;
+	}
+}
+
+$result_str = "";
+foreach ($bad_sensors as $arr) {
+	list($label, $result, $status) = $arr;
+	$result_str .= "($label, $status, $result) ";
+}
+if (count($bad_sensors) > 0) {
+	pexit(CRITICAL, "Sensors bad: " . $result_str);
+}
+if ($nsensors == 0) {
+	pexit(UNKNOWN, "No sensors found."); 
+}
+pexit(OK, "All $nsensors sensors ok.");
+?>

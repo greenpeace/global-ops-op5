@@ -1,0 +1,23 @@
+[commands]
+check_hpjd=$USER1$/check_hpjd -H $HOSTADDRESS$ -C $ARG1$
+check_hpjd_public=$USER1$/check_hpjd -H $HOSTADDRESS$ -C public
+[name]
+check_hpjd
+
+[info]
+Checks the STATUS of an HP printer with a JetDirect card.
+[why]
+To keep track of problems with your HP Printers.
+[how]
+By using SNMP.
+[platforms]
+HP printers with Deskjet card.
+
+[categories]
+Printers
+
+[support]
+5
+
+[tags]
+hp, printer, jetdirect, snmp

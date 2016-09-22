@@ -1,0 +1,23 @@
+[name]
+check_snmp_css
+
+[info]
+The plugin checks Cisco Content Switch
+
+[why]
+To make sure the services on your Cisco Content Switch works as they are supposed to.
+
+[how]
+By SNMP.
+
+[platforms]
+Cisco Content Switch
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+cisco, css, network, snmp

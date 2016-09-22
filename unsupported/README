@@ -1,0 +1,11 @@
+The plugins in the /opt/plugins/unsupported and below are packaged
+as an addition to the plugins package in the hope that it will be useful,
+but OP5 has not verified, tested or otherwise qualified the plugins
+residing in this directory or any directory below them.
+
+check_commands or statistics scripts pointing to scripts in the
+unsupported directory may are discouraged unless you really know what
+you're doing, since those check_commands may no longer work in the future
+should we decide to start to support the plugin in question, in which case
+we will move the supported plugin to the standard plugin directory,
+/opt/plugins.

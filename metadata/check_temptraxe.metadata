@@ -1,0 +1,23 @@
+[commands]
+check_temptracker_e=$USER1$/check_temptraxe --celsius -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
+check_temptrax_e4_probe=$USER1$/check_temptraxe --celsius -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -p $ARG3$
+[name]
+check_temptraxe
+
+[info]
+Check temperatures of a probe connected to a TempTrax Model E.
+[why]
+To be notified when temperatures in e.g. server rooms rise above defined thresholds.
+[how]
+The plugin queries status of Temptrax via HTTP protocol.
+[platforms]
+TempTrax Model E.
+
+[categories]
+Environmental
+
+[support]
+5
+
+[tags]
+environment, temperature, temptrax model e

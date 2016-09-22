@@ -1,0 +1,21 @@
+[name]
+check_ups
+
+[info]
+Checks SNMP enabled UPS'es
+[why]
+To automatically monitor the status of your UPS'es and get notified in case of an outage.
+[how]
+Checks status on UPS'es. You can check batterystatus, temperature, battery load etc.
+[platforms]
+UPS with RFC1628 SNMP support
+
+
+[categories]
+Hardware
+
+[support]
+5
+
+[tags]
+ups, rfc1628, snmp, hardware

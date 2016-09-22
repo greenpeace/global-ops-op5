@@ -1,0 +1,23 @@
+[name]
+check_logserver
+
+[info]
+Sometimes you end up with logfiles that for some reason can not be parsed correctly. They will then be placed in the error direcetory in op5 LogServer. This plugin is used to check the number of logs sent to the error directory in op5 LogServer.
+
+[why]
+To give you the possibility to monitor how many logs that are placed in the error directory.
+
+[how]
+By open the error directory and count the number of files.
+
+[platforms]
+op5 LogServer
+
+[categories]
+Logs
+
+[support]
+4
+
+[tags]
+op5 logserver, error logs

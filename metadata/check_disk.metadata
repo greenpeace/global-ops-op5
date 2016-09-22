@@ -1,0 +1,27 @@
+[commands]
+check_disk_of_backup_share=$USER1$/negate --unknown=CRITICAL -s $USER1$/check_disk -p '$ARG2$' -X $ARG3$ -w $ARG4$ -c $ARG5$
+check_disk_custom=$USER1$/check_disk $ARG1$
+
+[name]
+check_disk
+
+[info]
+Check Disk usage on a mounted partition.
+
+[why]
+To keep track of disk usage and get notified before disks fill up.
+
+[how]
+Checks the disk usage on a mounted partition. Lets you specify thresholds on usage and what partition to check.
+
+[platforms]
+Unix
+
+[categories]
+File System
+
+[support]
+4
+
+[tags]
+linux, unix, file system, disk

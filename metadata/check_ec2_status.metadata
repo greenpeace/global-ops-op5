@@ -1,0 +1,30 @@
+[commands]
+check_ec2_status=$USER1$/check_aws/check_ec2_status.rb -a $HOSTADDRESS$ -i $ARG1$ -f $ARG2$
+
+[name]
+check_ec2_status
+
+[info]
+Check the status on instance on Amazon Web Services EC2
+
+[why]
+To be able to keep track of the status of your AWS EC2 instances
+
+[how]
+This plugin checks the status of an instance on Amazon Web Service EC2 using Amazon EC2 API.
+The Amazon credentials will be read from an encrypted file. When using the Amazon EC2 API you will be able to monitor the staus of your instances without installing an agent or using SNMP. All you need to do is to create a readonly user and a and create a key pair. Add the key pair and the credential keys to the op5 Monitor server and you are ready to go.
+
+[keywords]
+amazon,aws
+
+[platforms]
+Amazon Web Services
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+amanzon, aws, web service, ec2, host

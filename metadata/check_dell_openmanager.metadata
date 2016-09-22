@@ -1,0 +1,35 @@
+# To install Dell Open Manage:
+#
+# wget -q -O - http://linux.dell.com/repo/hardware/bootstrap.cgi | bash
+# yum install srvadmin-storageservices srvadmin-base
+# srvadmin-services.sh start
+#
+
+[commands]
+check_dell-openmanage=$USER1$/check_dell_openmanage.1.2.pl -H $HOSTADDRESS$  -C $ARG1$ -T dellom
+check_dell-openmanage_storage=$USER1$/check_dell_openmanage.1.2.pl -H $HOSTADDRESS$  -C $ARG1$ -T dellom_storage
+check_dell-openmanage_blade=$USER1$/check_dell_openmanage.1.2.pl -H $HOSTADDRESS$  -C $ARG1$ -T blade
+check_dell-openmanage_global=$USER1$/check_dell_openmanage.1.2.pl -H $HOSTADDRESS$  -C $ARG1$ -T global
+check_dell-openmanage_custom=$USER1$/check_dell_openmanage.1.2.pl -H $HOSTADDRESS$ -C $ARG1$ -T $ARG2$
+
+[info]
+This plugin checks the status of objects monitored by OpenManager on DELL servers via SNMP.
+
+[why]
+To make sure you will get informed if there is any problem with the hardware on you Dell Servers.
+
+[how]
+It checks temperature, disks (raid), powersupply etc via SNMP.
+Note: Installation of Dell Open Manage on the remote server is required. 
+
+[platforms]
+Dell Servers with Dell Open Manager installed.
+
+[categories]
+Hardware
+
+[support]
+6
+
+[tags]
+dell, open manager, hardware, storage, powersupply, temperature, snmp

@@ -1,0 +1,22 @@
+[commands]
+check_radius=$USER1$/check_radius -H $HOSTADDRESS$ -F /etc/radiusclient-ng/radiusclient.conf -u $ARG1$ -p $ARG2$ -t 10
+[name]
+check_radius
+
+[info]
+Check status of a radius server.
+[why]
+To see that your Radius server is working.
+[how]
+Simulates a connection from a NAS to a radius server. Let you specify username, password and NAS identifier. You can also specify the expected response and timeout.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+radius, network

@@ -1,0 +1,26 @@
+[commands]
+check_sitescanner=$USER1$/check_sitescanner -H $ARG1$ -u $ARG2$ -S $ARG3$ -U $ARG4$ -P $ARG5$ -t 20 
+
+[name]
+check_sitescanner
+
+[info]
+Checks and return the status of Sitescanner sensors and reports back the current status. Requires a Sitescanner account.
+
+[why]
+To integrate your Sitescanner monitoring into op5 Monitor.
+
+[how]
+The plugin contacts the simplified sensor status interface to get the status of the sensor with the specified sensorid.
+
+[platforms]
+Sitescanner accounts
+
+[categories]
+Network, Web
+
+[support]
+6
+
+[tags]
+web, sitescanner, network

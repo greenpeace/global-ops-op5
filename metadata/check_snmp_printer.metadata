@@ -1,0 +1,22 @@
+[commands]
+check_snmp_printer=$USER1$/check_snmp_printer -H $HOSTADDRESS$ -C $ARG1$ -P $ARG2$
+[name]
+check_snmp_printer
+
+[info]
+Check printers via SNMP.
+[why]
+To check status of printers.
+[how]
+Connects via SNMP to the printers and check their status regarding paper trays and toner levels.
+[platforms]
+Printers that support RFC-1759.
+
+[categories]
+SNMP
+
+[support]
+5
+
+[tags]
+printer, toner, paper, rcf1759, snmp

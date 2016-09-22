@@ -1,0 +1,40 @@
+[commands]
+check_xenapi_list_host=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -l listhost
+check_xenapi_list_pool=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -l listpool
+check_xenapi_list_vms=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -l list
+check_xenapi_host_cpu=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l cpu -w $ARG4$ -c $ARG5$
+check_xenapi_host_cpu_core=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l cpu -s $ARG4$ -w $ARG5$ -c $ARG6$
+check_xenapi_host_io=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l io
+check_xenapi_host_mem=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l mem -w $ARG4$ -c $ARG5$
+check_xenapi_host_net=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l net
+check_xenapi_host_time=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -H $ARG3$ -l time -s $ARG4$
+check_xenapi_vm_cpu=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -N $ARG3$ -l cpu -w $ARG4$ -c $ARG5$
+check_xenapi_vm_io=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -N $ARG3$ -l io
+check_xenapi_vm_mem=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -N $ARG3$ -l mem -w $ARG4$ -c $ARG5$
+check_xenapi_vm_mem_ballooned=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -N $ARG3$ -l mem -s ballooned -w $ARG4$ -c $ARG5$
+check_xenapi_vm_net=$USER1$/check_xenapi.pl -S https://$HOSTADDRESS$ -u $ARG1$ -p $ARG2$ -N $ARG3$ -l net
+
+
+[name]
+check_xenapi
+
+[info]
+Check status of Citrix XEN Server Cluster installation.
+
+[why]
+The plugin checks status (CPU, memory, disk io, ...) of virtual machines running inside Citrix XEN Server Cluster and the hosts yourself.
+
+[how]
+The plugin queries status of Citrix XEN Server Cluster using the XEN API
+
+[platforms]
+Citrix XEN Server
+
+[categories]
+Operating Systems
+
+[support]
+4
+
+[tags]
+xen, citrix, os

@@ -1,0 +1,20 @@
+[name]
+check_procs
+
+[info]
+Checks status of processes.
+[why]
+For example to see that important applications are running.
+[how]
+Checks amount of running processes lets you configure tresholds for the amount of processes that is allowed to run. You can also look for a specifig process, a users processes and diffrent states of a process.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+unix, linux, process, states

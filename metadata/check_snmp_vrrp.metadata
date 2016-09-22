@@ -1,0 +1,26 @@
+[name]
+check_snmp_vrrp
+
+[info]
+The plugin checks the interface state of vrrp cluster.
+
+[why]
+To make sure your vrrp interfaces are in the right state, have right number of members in the cluster and that the load is not too high.
+
+[how]
+By SNMP. Depending on the state you put as option ("master" or "backup") the script will get all the vrrp enables interface and check they are in this state. If not, it will retrun a critical status
+By default, it will check Nokia IP platforms using vrrp
+
+[platforms]
+Nokia IP with ipso 3.X , 4.X in both VRRP mode and clustering mode.
+Radware Linkproof
+Alteon AD4 Loadbalancers
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+nokia, ipso, radware, alteon, loadbalancer, vrrp, cluster, snmp

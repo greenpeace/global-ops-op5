@@ -1,0 +1,32 @@
+[name]
+check_snmp_env
+
+[info]
+The plugin checks environemental parameters such as fan, power supply, temperature on the following type of hosts:
+
+Cisco
+Nokia Ipso
+Bluecoat
+IronPort
+Foundry
+
+Not all parameters are supported on every type of host.
+
+[why]
+To get control of the hardware in your network units.
+
+[how]
+By SNMP.
+
+[platforms]
+Cisco, Nokia Ipso, Bluecoat, IronPort, Foundry
+
+
+[categories]
+SNMP, Networking
+
+[support]
+5
+
+[tags]
+switch, router, cisco, nokia, bluecoat, ironport, foundry, environment, fan, power, temperature, snmp, network

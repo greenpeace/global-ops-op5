@@ -1,0 +1,20 @@
+[name]
+check_nntps
+
+[info]
+Tests NNTPS connections.
+[why]
+To catch problems with an SNNTP server
+[how]
+Connects to a SNNTP host to test the connection. You can also specify thresholds on responstime.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+snntp, news server

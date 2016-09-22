@@ -1,0 +1,26 @@
+[commands]
+check_sms_failed=$USER1$/check_file -f /var/spool/sms/failed/ -d -v num -W $ARG1$ -C $ARG2$
+[name]
+check_file
+
+[info]
+Checks the age and size of a file. It can also be used to monitor the number of certain files in a folder.
+
+[why]
+To keep track of files and folders. For example making sure a sertain file does not gets too large.
+
+[how]
+By checking the age and size of files, number of files in folders.
+
+[platforms]
+Unix / Linux
+
+[categories]
+File System
+
+[support]
+4
+
+[tags]
+unix, linux, file, file system
+check_sms_failed=sms

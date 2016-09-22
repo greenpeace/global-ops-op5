@@ -1,0 +1,129 @@
+[commands]
+check_extreme_cpu=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.1916.1.1.1.28.0 -w $ARG2$ -c $ARG3$ -l "CPU" -u %
+check_extreme_power=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.1916.1.1.1.21.0 -r 2 -l "Power"
+check_extreme_temperature=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.1916.1.1.1.8.0 -w $ARG2$ -c $ARG3$ -l "Temperature" -u "c"
+check_hp_cpu=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.11.2.14.11.5.1.9.6.1.0 -t 5  -w $ARG2$ -c $ARG3$ -u % -l "5min cpu"
+check_hp_fan=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.1 -w 4 -c 3:5 -l 'Fan status'
+check_hp_fibre_array_status=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.232.16.2.2.1.1.6.1.1 -l "Fibre array:" -u "->(1)Other - (2)OK - (3)Degrades - (4)Failed" -c 2 -m:
+check_hp_memoryfree=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.11.2.14.11.5.1.1.2.1.1.1.6.1 -t 5 -w $ARG2$ -c $ARG3$ -u bytes -l free
+check_hp_nic_status=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.232.18.2.3.1.1.13.$ARG2$ -l "NIC status:" -u "->(1)Unknown - (2)Active - (3)Standby - (4)Failed" -w 2 -c 2:3 -m:
+check_hp_power=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.2 -w 4 -c 3:5 -l 'Power Supply status'
+check_hp_power_supply_condition=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.232.6.2.9.3.1.4.0.$ARG2$ -l "Power Supply:" -u "->(1)Other - (2)OK - (3)Degrades - (4)Failed" -c 2 -m:
+check_hp_raid_ctrl_status=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.232.3.2.2.1.1.6.0 -l "Raid status:" -u "->(1)Other - (2)OK - (3)Degrades - (4)Failed" -c 2 -m:
+check_hp_temperature=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -o .1.3.6.1.4.1.11.2.14.11.1.2.6.1.4.4 -w 4 -c 3:5 -l 'Temperature status'
+check_ibm_3584_media_access_availability=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.2.6.182.3.6.2.1.5.$ARG2$ -l "Media Access Device Availability:" -u"-->unknown (0) other (1) runningFullPower (2)  warning (3)  inTest (4) notApplicable (5) powerOff (6) offLine (7) offDuty (8) degraded (9) notInstalled (10)  installError (11) powerSaveUnknown (12) powerSaveLowPowerMode (13) powerSaveStandby (14) powerCycle (15) powerSaveWarning (16) paused (17) notReady (18)" -w 0:2 -c 1:2 -m:
+check_ibm_3584_nr_of_physichal_medias=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.2.6.182.3.7.1.0 -l "Nr of Physichal medias:" -w $ARG2$ -c $ARG3$ -m:
+check_ibm_3584_security_breach=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.2.6.182.3.4.5.0 -l "Security Status:" -u "-->(0)Unknown (1)Other (2)No Breach (3)Breach Attempt" -c 0:2 -m:
+check_ibm_3584_status_of_mediaaccessdevice=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.2.6.182.3.6.2.1.4.$ARG2$ -l "Media Access Device Status:" -r $ARG3$ -m:
+check_ibm_3584_storage_library_status=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.2.6.182.3.5.4.0 -l "Storage Library Status:"  -r $ARG2$ -m:
+check_ibm_raidstatus=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C $ARG1$ -o .1.3.6.1.4.1.2.6.159.1.1.30.3.1.6.19.115.101.114.118.101.114.97.105.100.32.115.117.98.115.121.115.116.101.109 -r "ServeRAID subsystem is working properly" -m:
+check_netbotz_airflow=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.5528.32.10.4.0 -l "Airflow" -u "meter / minute" -w $ARG2$ -c $ARG3$ -m:
+check_netbotz_door=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.5528.32.10.6.0 -l "Door Status:" -u "->(0)Closed  (1)Open" -w $ARG2$ -m:
+check_netbotz_humidity=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.5528.32.10.3.0 -l "Humidity:" -u "%" -w $ARG2$ -c $ARG3$ -m:
+check_netbotz_motion_detection=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.5528.32.10.16.0 -l "Camera motion detection:" -u "->(0)No motion (1)Motion detected" -w $ARG2$ -m:
+check_netbotz_temp=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -P 1 -o .1.3.6.1.4.1.5528.32.10.2.0 -l "Temperature:" -u "degrees Celcius * 10" -w $ARG2$ -c $ARG3$ -m:
+check_snmp=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -o $ARG1$ -w $ARG2$ -c $ARG3$ -C$ARG4$ -m:
+check_snmp_apc_ups_batterystatus=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.318.1.1.1.2.1.1.0 -C $ARG1$ -P 1 -l "Battery Status is" --string="2" -m:
+check_snmp_apc_ups_batterytime=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.318.1.1.1.2.1.2.0 -C $ARG1$ -u sec -P 1 -l "Time on Battery is" --string="Timeticks: (0) 0:00:00.00" -m:
+check_snmp_apc_ups_minremain=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.318.1.1.1.2.2.3.0 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u min -P 1 -l "Minutes Remaining is" -m:
+check_snmp_apc_ups_percentload=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.318.1.1.1.4.2.3.0 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u % -P 1 -l "UPS Load is" -m:
+check_snmp_apc_ups_temp=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.318.1.1.1.2.2.2.0 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u c -P 1 -l "Battery Temp is" -m:
+check_snmp_cisco_cpu=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -o .1.3.6.1.4.1.9.2.1.58.0 -w $ARG1$ -c $ARG2$ -C$ARG3$ -u % -l "CPU load is" -m:
+check_snmp_cisco_mem=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -o .1.3.6.1.4.1.9.9.48.1.1.1.5.1 -w $ARG1$ -c $ARG2$ -C$ARG3$ -u b -l "Memory usage is" -m:
+check_snmp_em1_humidity=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C $ARG1$ -o .1.3.6.1.4.1.16174.1.1.3.3.$ARG2$.6.0 -l "Humidity:" -u % -w $ARG3$ -c $ARG4$
+check_snmp_em1_temperature=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C $ARG1$ -o .1.3.6.1.4.1.16174.1.1.3.3.$ARG2$.3.0 -l "Temperature:" -u c -w $ARG3$ -c $ARG4$
+check_snmp_em1_wetness=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C $ARG1$ -o .1.3.6.1.4.1.16174.1.1.3.3.$ARG2$.9.0 -l "Wetness:" -u % -w $ARG3$ -c $ARG4$
+check_snmp_ipso_chassitemp=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.94.1.21.1.1.5.0 -C $ARG1$ -r 1 -P 1 -l "Chassi Temperature is" -m:
+check_snmp_ipso_cpuload=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.94.1.21.1.7.1.0 -C $ARG1$ -w $ARG2$ -c $ARG3$ -P 1 -l "CPU Load is" -u % -m:
+check_snmp_ipso_fanstatus=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.94.1.21.1.2.1.1.2.$ARG2$ -C $ARG1$ -r 1 -P 1 -l "Fan Status is" -m:
+check_snmp_ipso_powersupplystatus=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.94.1.21.1.3.1.1.2.$ARG2$ -C $ARG1$ -r 1 -P 1 -l "Power Supply Status is" -m:
+check_snmp_ipso_powersupplytemp=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.4.1.94.1.21.1.3.1.1.3.$ARG2$ -C $ARG1$ -r 1 -P 1 -l "Power Supply Temperature is" -m:
+check_snmp_netapp_cpu=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -o .1.3.6.1.4.1.789.1.2.1.3.0 -w $ARG1$ -c $ARG2$ -C$ARG3$ -l "CPU Load is" -u % -m:
+check_snmp_netapp_failed_disk=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C$ARG1$ -o .1.3.6.1.4.1.789.1.6.4.7.0 -c 1 -l "Disk" -u "Failure(s)" -m:
+check_snmp_netapp_fans=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C$ARG1$ -o .1.3.6.1.4.1.789.1.2.4.3.0 -s '"There are no failed fans."' -l "Fans" -m:
+check_snmp_netapp_power=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C$ARG1$ -o .1.3.6.1.4.1.789.1.2.4.5.0 -s '"There are no failed power supplies."' -l "Power" -m:
+check_snmp_netapp_temperature=$USER1$/check_snmp -H $HOSTADDRESS$ -P 1 -C$ARG1$ -o .1.3.6.1.4.1.789.1.2.4.1.0 -r 1 -l "Temperature is" -m:
+check_snmp_sicon_ups_batteryremain=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -w $ARG2$ -c $ARG3$ -o .1.3.6.1.4.1.4555.1.1.1.1.2.3 -l "Battery Time remaining(min)" -m:
+check_snmp_sicon_ups_involtage=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -w $ARG2$ -c $ARG3$ -o .1.3.6.1.4.1.4555.1.1.1.1.3.3.1.2 -l "Input Voltage (0.1V)" -m:
+check_snmp_sicon_ups_outvoltage=$USER1$/check_snmp -H $HOSTADDRESS$ -C $ARG1$ -w $ARG2$ -c $ARG3$ -o .1.3.6.1.4.1.4555.1.1.1.1.4.4.1.2 -l "Output Voltage (0.1V)" -m:
+check_snmp_sysinfo=$USER1$/check_snmp -H $HOSTADDRESS$ -C$ARG1$ -o .1.3.6.1.2.1.1.1.0 -m:
+check_snmp_ups_batterysec=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.2.1.33.1.2.2.0 -C $ARG1$ -u sec -P 1 -l "Second on Battery is" --string="0" -m:
+check_snmp_ups_batterystatus=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.2.1.33.1.2.1.0 -C $ARG1$ -P 1 -l "Battery Status is" --string="2" -m:
+check_snmp_ups_minremain=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.2.1.33.1.2.3.0 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u min -P 1 -l "Minutes Remaining is" -m:
+check_snmp_ups_percentload=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.2.1.33.1.4.4.1.5.1 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u % -P 1 -l "UPS Load is" -m:
+check_snmp_ups_temp=$USER1$/check_snmp -H $HOSTADDRESS$ -o .1.3.6.1.2.1.33.1.2.7.0 -w $ARG1$ -c $ARG2$ -C $ARG3$ -u c -P 1 -l "Battery Temp is" -m:
+check_snmp_v3=$USER1$/check_snmp -H $HOSTADDRESS$ -P 3 -o $ARG1$ -w $ARG2$ -c $ARG3$ $ARG4$ -l '$ARG5$' -u $ARG6$ -m:
+[name]
+check_snmp
+
+[info]
+Checks devices that supports SNMP.
+[why]
+To get status of a device that supports SNMP.
+[how]
+Let you obtain status by using the SNMP protocol. The plugin has support for version 1, 2c and 3. You need to specify version, community or username/password and OID to poll. You can then set thresholds on numeric ranges or match for specific strings. This is a very flexible plugin and can be used for almost anything with SNMP support.
+[platforms]
+Not platform dependent.
+
+
+[categories]
+SNMP
+
+[support]
+4
+
+[tags]
+snmp
+check_extreme_cpu=extreme snmp
+check_extreme_power=extreme snmp
+check_extreme_temperature=extreme snmp
+check_hp_cpu=hp snmp
+check_hp_fan=hp snmp
+check_hp_fibre_array_status=hp snmp
+check_hp_memoryfree=hp snmp
+check_hp_nic_status=hp snmp
+check_hp_power=hp snmp
+check_hp_power_supply_condition=hp snmp
+check_hp_raid_ctrl_status=hp snmp
+check_hp_temperature=hp snmp
+check_ibm_3584_media_access_availability=ibm 3584 snmp
+check_ibm_3584_nr_of_physichal_medias=ibm 3584 snmp
+check_ibm_3584_security_breach=ibm 3584 snmp
+check_ibm_3584_status_of_mediaaccessdevice=ibm 3584 snmp
+check_ibm_3584_storage_library_status=ibm 3584 snmp
+check_ibm_raidstatus=ibm raid status snmp
+check_netbotz_airflow=netbotz snmp
+check_netbotz_door=netbotz snmp
+check_netbotz_humidity=netbotz snmp
+check_netbotz_motion_detection=netbotz snmp
+check_netbotz_temp=netbotz snmp
+check_snmp=generic snmp
+check_snmp_apc_ups_batterystatus=ups apc snmp
+check_snmp_apc_ups_batterytime=ups apc snmp
+check_snmp_apc_ups_minremain=ups apc snmp
+check_snmp_apc_ups_percentload=ups apc snmp
+check_snmp_apc_ups_temp=ups apc snmp
+check_snmp_cisco_cpu=cisco snmp
+check_snmp_cisco_mem=cisco snmp
+check_snmp_em1_humidity=environment probe em1 snmp
+check_snmp_em1_temperature=environment probe em1 snmp
+check_snmp_em1_wetness=environment probe em1 snmp
+check_snmp_ipso_chassitemp=ipso hardware snmp
+check_snmp_ipso_cpuload=ipso hardware snmp
+check_snmp_ipso_fanstatus=ipso hardware snmp
+check_snmp_ipso_powersupplystatus=ipso hardware snmp
+check_snmp_ipso_powersupplytemp=ipso hardware snmp
+check_snmp_netapp_cpu=netapp hardware snmp
+check_snmp_netapp_failed_disk=netapp hardware snmp
+check_snmp_netapp_fans=netapp hardware snmp
+check_snmp_netapp_power=netapp hardware snmp
+check_snmp_netapp_temperature=netapp hardware snmp
+check_snmp_sicon_ups_batteryremain=sicon ups snmp
+check_snmp_sicon_ups_involtage=sicon ups snmp
+check_snmp_sicon_ups_outvoltage=sicon ups snmp
+check_snmp_sysinfo=system information snmp
+check_snmp_ups_batterysec=ups snmp
+check_snmp_ups_batterystatus=ups snmp
+check_snmp_ups_minremain=ups snmp
+check_snmp_ups_percentload=ups snmp
+check_snmp_ups_temp=ups snmp

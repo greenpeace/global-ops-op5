@@ -1,0 +1,47 @@
+[commands]
+check_http=$USER1$/check_http -H $HOSTADDRESS$
+check_https=$USER1$/check_http -H $HOSTADDRESS$ -S
+check_https_auth=$USER1$/check_http -H $HOSTADDRESS$ -a $ARG1$:$ARG2$ -S
+check_https_auth_url=$USER1$/check_http -H $HOSTADDRESS$ -a $ARG1$:$ARG2$ -S -u $ARG3$
+check_https_certificate=$USER1$/check_http -H $HOSTADDRESS$ -S -C $ARG1$
+check_https_port=$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$ -S
+check_https_port_url=$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$ -u $ARG2$ -S
+check_https_timeout=$USER1$/check_http -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -S
+check_https_timeout_url=$USER1$/check_http -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -u $ARG3$ -S
+check_https_url=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -S
+check_https_url_regex=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -r $ARG2$ -S
+check_https_url_string=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -s $ARG2$ -S
+check_https_vhost=$USER1$/check_http -H $ARG1$ -S
+check_https_vhost_certificate=$USER1$/check_http -H $ARG1$ -S -C $ARG2$
+check_https_vhost_url_string=$USER1$/check_http -H $ARG1$ -u $ARG2$ -s $ARG3$ -S
+check_http_auth=$USER1$/check_http -H $HOSTADDRESS$ -a $ARG1$:$ARG2$
+check_http_auth_url=$USER1$/check_http -H $HOSTADDRESS$ -a $ARG1$:$ARG2$ -u $ARG3$
+check_http_port=$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$
+check_http_port_url=$USER1$/check_http -H $HOSTADDRESS$ -p $ARG1$ -u $ARG2$
+check_http_timeout=$USER1$/check_http -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$
+check_http_timeout_url=$USER1$/check_http -H $HOSTADDRESS$ -w $ARG1$ -c $ARG2$ -u $ARG3$
+check_http_url=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$
+check_http_url_regex=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -r $ARG2$
+check_http_url_string=$USER1$/check_http -H $HOSTADDRESS$ -u $ARG1$ -s $ARG2$
+check_http_vhost=$USER1$/check_http -H $ARG1$
+check_http_vhost_url_string=$USER1$/check_http -H $ARG1$ -u $ARG2$ -s $ARG3$
+[name]
+check_http
+
+[info]
+Checks status of a webserver
+[why]
+To get status of your webservers
+[how]
+This plugin enables you to check a lot of diffrent things on a webserver. Responstime, HTTP, HTTPS, specific URL's, match strings on a page, diffrent ports, validity of SSL Certificates and more. You may also use it to valiadate certificates on mailservers etc.
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking, Web
+
+[support]
+4
+
+[tags]
+http, web, https, ssl, url

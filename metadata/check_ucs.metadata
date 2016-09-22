@@ -1,0 +1,32 @@
+[commands]
+check_ucs_temp=$USER1$/check_ucs -H $HOSTADDRESS$ -C $ARG1$ -T ct -N $ARG2$
+check_ucs_fan_status=$USER1$/check_ucs -H $HOSTADDRESS$ -C $ARG1$ -T f -N $ARG2$
+check_ucs_iocard_status=$USER1$/check_ucs -H $HOSTADDRESS$ -C $ARG1$ -T ci -N $ARG2$
+check_ucs_PSU_status=$USER1$/check_ucs -H $HOSTADDRESS$ -C $ARG1$ -T po -N $ARG2$
+check_ucs_fault_summary=$USER1$/check_ucs -H $HOSTADDRESS$ -C $ARG1$ -T fs
+
+[name]
+check_ucs
+
+[info]
+Check status of Cisco UCS Blade chassi
+
+[why]
+To check the status of chassi temperature, chassi fans status, chassi power supplies status,
+IO card status and faulty summary from UCS manager.
+
+[how]
+The plugin will ask a remote machine over SNMP v2c using perl NET::SNMP so you need to make
+sure you have SNMP read access on the Cisco UCS system you are going to monitor.
+
+[platforms]
+Cisco UCS Blade systems
+
+[categories]
+Hardware
+
+[support]
+6
+
+[tags]
+Cisco UCS, hardware, powersupply, fan, snmp, blade system, temperature, UCS manager

@@ -1,0 +1,25 @@
+[commands]
+check_dhcp=$USER1$/check_dhcp
+[name]
+check_dhcp
+
+[info]
+Tests functionality of a DHCP server.
+
+[why]
+To see that the DHCP server is working.
+
+[how]
+Asks for a IP Address. You can specify wich IP to ask for and what server to ask.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+dhcp, network, ip address

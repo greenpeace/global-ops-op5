@@ -1,0 +1,23 @@
+[name]
+check_breeze
+
+[info]
+This plugin reports the signal strength of a Breezecom wireless equipment.
+
+[why]
+To identify problems with breezecom equippment related to signal strength.
+
+[how]
+By SNMP
+
+[platforms]
+Breezecom boxes
+
+[categories]
+Networking
+
+[support]
+5
+
+[tags]
+breezcom, wireless, snmp

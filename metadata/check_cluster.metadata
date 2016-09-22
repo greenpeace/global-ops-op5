@@ -1,0 +1,23 @@
+[name]
+check_cluster
+
+[info]
+Used to check a cluster of services or hosts.
+
+[why]
+To make sure a clustered service is delivered as it is suposed to do.
+
+[how]
+By checking, in op5 Monitor, already defined services.
+
+[platforms]
+Not platform dependent
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+clustered services, op5 monitor

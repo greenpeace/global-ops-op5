@@ -1,0 +1,20 @@
+[name]
+check_mrtg
+
+[info]
+This plugins lets you monitor data in an MRTG logfile.
+[why]
+If you have MRTG installed and whant to  monitor the contents of a graph.
+[how]
+By looking for a value in the specified logfile. You can also set thresholds. This plugin only searches for one single value in the logfile. Note: this only works with old versions of MRTG that doesnt uses rrdtool.
+[platforms]
+Unix
+
+[categories]
+Misc
+
+[support]
+6
+
+[tags]
+mrtg

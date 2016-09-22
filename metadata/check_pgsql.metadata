@@ -1,0 +1,21 @@
+[name]
+check_pgsql
+
+[info]
+Checks status on a Postgresql database.
+[why]
+Let you keep track of the status of your postgresql databases.
+[how]
+Connects to a postgresql database and checks if it is accepting connections. Lets you specify database, username, password and also to set thresholds on responsetime.
+[platforms]
+Not platform dependent
+
+
+[categories]
+Databases
+
+[support]
+4
+
+[tags]
+postgresql, database

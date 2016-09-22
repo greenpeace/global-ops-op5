@@ -1,0 +1,23 @@
+[name]
+check_ping
+
+[info]
+This plugin checks a number of given hosts to see if they are alive.
+
+[why]
+To test the connectivity to a number of hosts at the same time.
+
+[how]
+The plugin check over ICMP and if any of the hosts are down the result is CRITICAL.
+
+[platforms]
+Not platform depended.
+
+[categories]
+Networking
+
+[support]
+4
+
+[tags]
+icmp, ping, network

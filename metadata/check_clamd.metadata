@@ -1,0 +1,23 @@
+[name]
+check_clamd
+
+[info]
+Tests CLAMD connections with the specified host (or unix socket).
+
+[why]
+To make sure the clam antivirus daemon is running and is responding.
+
+[how]
+Connects to the clam daemont either via TCP or the local unix socket. The received string is parsed.
+
+[platforms]
+Any host running Clamd
+
+[categories]
+Misc
+
+[support]
+5
+
+[tags]
+antivirus, clamd

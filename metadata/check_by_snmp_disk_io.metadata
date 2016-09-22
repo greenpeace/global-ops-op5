@@ -1,0 +1,38 @@
+[commands]
+check_by_snmp_disk_io_list_available_disks_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c --list
+check_by_snmp_disk_io_nread_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T nread -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_io_nwritten_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T nwritten -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_io_reads_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T reads -i '$ARG2$' -w$ARG3$ -c$ARG4$
+check_by_snmp_disk_io_writes_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T writes -i '$ARG2$' -w$ARG3$ -c$ARG4$
+check_by_snmp_disk_io_load_v2=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T load -i '$ARG2$' -w$ARG3$,$ARG4$,$ARG5$ -c$ARG6$,$ARG7$,$ARG8$
+check_by_snmp_disk_io_list_available_disks_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 --list
+check_by_snmp_disk_io_nread_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 -T nread -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_io_nwritten_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 -T nwritten -i '$ARG2$' -m '$ARG3$' -w$ARG4$ -c$ARG5$
+check_by_snmp_disk_io_reads_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 -T reads -i '$ARG2$' -w$ARG3$ -c$ARG4$
+check_by_snmp_disk_io_writes_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 -T writes -i '$ARG2$' -w$ARG3$ -c$ARG4$
+check_by_snmp_disk_io_load_v3=$USER1$/check_by_snmp_disk_io -H $HOSTADDRESS$ $ARG1$ -P 3 -T load -i '$ARG2$' -w$ARG3$,$ARG4$,$ARG5$ -c$ARG6$,$ARG7$,$ARG8$
+check_by_snmp_disk_io_custom=$USER1$/check_by_snmp_disk_io $ARG1$
+
+[name]
+check_by_snmp_disk_io
+
+[info]
+Checks disk information about IO on harddrives using SNMP.
+
+[why]
+This can be usefull to monitor disk usage on hosts where you are not able to install any agents.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Unix/Linux
+
+[categories]
+SNMP, File System
+
+[support]
+5
+
+[tags]
+unix, linux, snmp, net-snmp, disk, io, hardware

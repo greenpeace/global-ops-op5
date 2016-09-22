@@ -1,0 +1,23 @@
+[name]
+check_by_ssh
+
+[info]
+Executes commands on remote hosts.
+
+[why]
+To be able to check status of diffrent things over an encrypted protocol.
+
+[how]
+The plugin uses ssh to connect to the remote host and then it exectue the command you like to use in your check.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Misc
+
+[support]
+4
+
+[tags]
+linux, unix, ssh, os

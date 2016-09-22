@@ -1,0 +1,40 @@
+[commands]
+check_by_snmp_cpu_total_usage_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T total -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_total_usage_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T total -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_user_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T user -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_user_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T user -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_nice_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T nice -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_nice_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T nice -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_system_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T system -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_system_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T system -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_idle_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T idle -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_idle_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T idle -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_iowait_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T iowait -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_iowait_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T iowait -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_steal_v2=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ -C '$ARG1$' -P 2c -T steal -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_steal_v3=$USER1$/check_by_snmp_cpu -H $HOSTADDRESS$ $ARG1$ -P 3 -T steal -w$ARG2$ -c$ARG3$
+check_by_snmp_cpu_custom=$USER1$/check_by_snmp_cpu $ARG1$
+
+[name]
+check_by_snmp_cpu
+
+[info]
+Checks CPU usage over SNMP.
+
+[why]
+This can be usefull to monitor cpu usage on hosts where you are not able to install any agents.
+
+[how]
+The plugin collects the monitored data over SNMP.
+
+[platforms]
+Unix/Linux
+
+[categories]
+SNMP, CPU 
+
+[support]
+5
+
+[tags]
+unix, linux, snmp, net-snmp, cpu, iowait

@@ -1,0 +1,28 @@
+[commands]
+check_json=$USER1$/check_json -u '$ARG1$' -a '$ARG2$' -w $ARG3$ -c $ARG4$
+check_json_perfvars=$USER1$/check_json -u '$ARG1$' -a '$ARG2$' -p '$ARG3$' -w $ARG4$ -c $ARG5$
+check_json_custom=$USER1$/check_json $ARG1$
+
+[name]
+check_json
+
+[info]
+Checks a HTTP server for JSON attributes.
+
+[why]
+To check attributes of your JSON data on a HTTP server.
+
+[how]
+Connects to a HTTP server and checks for JSON attributes. Performance data is also enhanced to extract performance data compliant to Nagios and Graphite standards. One attribute is selected for thresholds check, multiple others can be added for extracting performance data.
+
+[platforms]
+Not platform dependent.
+
+[categories]
+Networking
+
+[support]
+5
+
+[tags]
+http, json

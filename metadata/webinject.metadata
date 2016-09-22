@@ -1,0 +1,26 @@
+[name]
+webinject
+
+[info]
+This plugin is used to make complex web queries.
+
+[why]
+You can use it to test login forms and other functions on a web site.
+
+[how]
+The plugin sends a POST or GET request an analyze the result. A long chain of tests can be made and used in monitoring.
+
+[platforms]
+Not platforms depended.
+
+[commands]
+check_webinject=$USER1$/webinject/webinject.pl testcases/$ARG1$
+
+[categories]
+Network, Web
+
+[support]
+4
+
+[tags]
+web applications

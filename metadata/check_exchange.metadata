@@ -1,0 +1,31 @@
+[commands]
+check_exchange_services=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c CheckServiceState -a ShowAll $ARG1$
+check_exchange_performance_counters=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c checkCounter -a $ARG1$ MaxWarn=$ARG2$ MaxCrit=$ARG3$
+
+
+[name]
+check_exchange
+
+[info]
+There are many ways to verify that a Microsoft Exchange mail server is running. You can check mail delivery, tcp-ports, services and more. No single test will provide a complete picture of the status of your Exchange-server, hence this how-to will describe how to combine several tests to have a reliable set of services that together provide the complete picture of the exchange servers status.
+
+[why]
+To verify end-to-end functionality of a complex e-mail system.
+
+[how]
+By check the must important services and performance counters.
+
+[platforms]
+Windows
+
+
+[categories]
+Mail
+
+[support]
+4
+
+[tags]
+email, microsoft exchange
+check_exchange_services=microsoft exchange
+check_exchange_performance_counters=microsoft exchange

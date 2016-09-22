@@ -1,0 +1,21 @@
+[name]
+check_log
+
+[info]
+Checks log files on unix system.
+[why]
+
+[how]
+This plugin will scan a log file (specified by the <log_file> option) for a specific pattern (specified by the <pattern> option).  Successive calls to the plugin script will only report *new* pattern matches in the log file, since an copy of the log file from the previous run is saved to <old_log_file>.
+
+[platforms]
+Unix
+
+[categories]
+Logs
+
+[support]
+4
+
+[tags]
+linux, unix, logs
