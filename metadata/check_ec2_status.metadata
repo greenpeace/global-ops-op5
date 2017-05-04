@@ -5,6 +5,8 @@ check_ec2_status=$USER1$/check_aws/check_ec2_status.rb -a $HOSTADDRESS$ -i $ARG1
 check_ec2_status
 
 [info]
+This plugin is deprecated in op5 Monitor >= 7.3.9. It will be removed in op5 Monitor 8.0.
+
 Check the status on instance on Amazon Web Services EC2
 
 [why]
@@ -24,7 +26,7 @@ Amazon Web Services
 Misc
 
 [support]
-5
+8
 
 [tags]
 amanzon, aws, web service, ec2, host

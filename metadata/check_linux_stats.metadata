@@ -22,6 +22,8 @@ check_nrpe_linux_uptime=$USER1$/check_nrpe -s -H $HOSTADDRESS$ -c linux_uptime
 check_linux_stats
 
 [info]
+This plugin is deprecated in op5 Monitor >= 7.3.9. It will be removed in op5 Monitor 8.0. See check_by_snmp and/or check_snmp instead.
+
 Monitoring cpu, disk, io, processes, paging and a lot more on a Linux host.
 
 [why]
@@ -41,7 +43,7 @@ Linux
 Operating Systems
 
 [support]
-4
+8
 
 [tags]
 Linux, cpu, memory, io, files, processes, paging, swap, disk
