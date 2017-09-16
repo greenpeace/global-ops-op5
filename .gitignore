@@ -41,4 +41,4 @@ remove_metatdata_files.sh
 *.pyo
 
 # OP5 Metadata
-metadata/
+metadata/*
