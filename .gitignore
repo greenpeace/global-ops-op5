@@ -39,3 +39,6 @@ remove_metatdata_files.sh
 ## Compiled Python
 *.pyc
 *.pyo
+
+# OP5 Metadata
+metadata/
