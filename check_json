@@ -146,6 +146,8 @@ foreach my $attribute (sort keys %attributes){
     my $check_value_str = '$check_value = $json_response->'.$attribute;
 
     if ($np->opts->verbose) { (print Dumper ($check_value_str))};
+    my $OK_CHARS = '-a-zA-Z0-9_.,@=$ >{};:/\\\"\'()';
+    $check_value_str =~ s/[^$OK_CHARS]/_/go;
     eval $check_value_str;
 
     if (!defined $check_value) {
@@ -177,6 +179,8 @@ if ($np->opts->perfvars) {
         # make label ascii compatible
         $label =~ s/[^a-zA-Z0-9_-]//g  ;
         my $perf_value;
+        my $OK_CHARS = '-a-zA-Z0-9_.,@=$ >{};:/\\\"\'()';
+        $key =~ s/[^$OK_CHARS]/_/go;
         $perf_value = eval '$json_response->'.$key;
         if ($np->opts->verbose) { print Dumper ("JSON key: ".$label.", JSON val: " . $perf_value) };
         if ( defined($perf_value) ) {
@@ -207,6 +211,8 @@ if ($np->opts->outputvars) {
         # make label ascii compatible
         $label =~ s/[^a-zA-Z0-9_-]//g;
         my $perf_value;
+        my $OK_CHARS = '-a-zA-Z0-9_.,@=$ >{};:/\\\"\'()';
+        $key =~ s/[^$OK_CHARS]/_/go;
         $perf_value = eval '$json_response->'.$key;
 	   push(@statusmsg, "$label: $perf_value");
     }
